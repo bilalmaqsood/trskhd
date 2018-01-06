@@ -11,6 +11,94 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+    /************************ Teachers Routes ***********************************************/
+        Route::get('salary/slip/{id}' , 'TeachersController@viewSalarySlip')->name('view_salary_slip');
+        Route::get('download/salary/slip/{id}' , 'TeachersController@downloadSalarySlip')->name('download_salary_slip');
+        Route::post('teacher/status/{id}' , 'TeachersController@status')->name('teacher.status');
+    /************************ End Teachers Routes ***********************************************/
+
+
+    /************************ Students Routes ***********************************************/
+
+        Route::post('student/status/{id}' , 'StudentsController@status')->name('student.status');
+
+        Route::get('student/{id}/slip' , 'StudentsController@rollNoSlip')->name('studentSlip');
+
+        Route::get('student/{id}/download/slip' , 'StudentsController@downloadRollNoSlip')->name('student.downloadSlip');
+
+    /************************ End Students Routes ***********************************************/
+
+     /************************ SMS Routes ***********************************************/
+        Route::resource('sms' , 'SMSController');
+        Route::get('single-sms' , 'SMSController@singleStudentSMS')->name('single.sms_view');
+        Route::post('send/single-sms' , 'SMSController@sendSingleSMS')->name('single.sms');
+
+    /************************* End SMS Routes *******************************************/
+
+
+    /************************ Admin Routes ***********************************************/
+
+        Route::middleware(['auth'])->prefix('admin')->group(function (){
+
+            Route::resource('student' , 'StudentsController');
+            Route::resource('teacher' , 'TeachersController');
+
+            Route::middleware(['can:admin'])->group(function (){
+                Route::resource('attendance' , 'AttendanceController');
+                Route::get('attendance-select/class' , 'AttendanceController@showClasses')->name('attendance_classes');
+                Route::get('all/class/students' , 'AttendanceController@showClassesStudents')->name('attendance_class_students');
+                Route::post('add/students/attendance' , 'AttendanceController@addStudentsAttendance')->name('add_attendance');
+
+
+                /************************ Fee Routes ***********************************************/
+                Route::resource('fee' , 'FeesController');
+                Route::post('admin/edit/{id}', 'FeesController@updateFee')->name('edit_fee');
+                Route::get('admin/delete/fee/{id}', 'FeesController@deleteFee')->name('delete_fee');
+                Route::get('select-class' , 'FeesController@showClasses')->name('show_classes');
+                Route::get('all/students' , 'FeesController@showClassesStudents')->name('class_students');
+                Route::post('add/students/fee' , 'FeesController@addStudentsFee')->name('add_fees');
+                /************************* End Fee Routes *******************************************/
+
+                /************************ Classes Routes ***********************************************/
+                Route::resource('classes' , 'ClassesController');
+                Route::post('get/books/{id}' , 'ClassesController@getBooks')->name('get.books');
+
+                Route::prefix('classes')->group(function (){
+                });
+                /************************* End Classes Routes *******************************************/
+
+                /************************ Exam Routes *****************************************/
+                Route::resource('exam' , 'ExamsController');
+                Route::get('exam/store/data' , 'ExamsController@examStoreData')->name('exam_store');
+                Route::get('add/number/{exam}/{book}' , 'ExamsController@addNumbers')->name('addNumbers');
+                Route::post('store/number/{exam}' , 'ExamsController@storeExamNumbers')->name('storeNumbers');
+                Route::resource('test' , 'TestsController');
+                Route::get('test/details/{id}' , 'TestsController@viewDetails')->name('testDetails');
+                Route::post('test/details/{id}' , 'TestsController@addTestMarks')->name('addTestMarks');
+
+                Route::get('report', 'TestsController@report')->name('test.report');
+
+                Route::prefix('exams')->group(function (){
+
+                    Route::get('report', 'ExamsController@report')->name('exam.report');
+
+                });
+                /************************* End Exam Routes *************************************/
+
+
+                Route::get('change/logo' , 'HomeController@logo')->name('logo');
+                Route::post('change/logo' , 'HomeController@changeLogo')->name('change.logo');
+
+
+            });
+
+        });
+    /************************ End Admin Routes ***********************************************/
+
+    Route::get('/', 'HomeController@index')->name('index');
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::post('password/change', 'UsersController@passwordReset')->name('password.mobile');
+
+    Auth::routes();
