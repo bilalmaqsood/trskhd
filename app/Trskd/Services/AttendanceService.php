@@ -15,12 +15,13 @@ use App\Trskd\Models\SchoolClass;
 
 class AttendanceService
 {
-    protected $model, $studentService;
+    protected $model, $studentService, $sms;
 
-    public function __construct(Attendance $attendance,StudentService $studentService)
+    public function __construct(Attendance $attendance,StudentService $studentService, SMSService $SMSService)
     {
         $this->model = $attendance;
         $this->studentService = $studentService;
+        $this->sms = $SMSService;
     }
 
     public function initialize()
@@ -35,7 +36,7 @@ class AttendanceService
     {
         $attendance = $this->model->create($data);
         $student = $this->studentService->find($data['student_id']);
-        sendSms($student->user->Mobile);
+        $this->sms->absentSMS($student->user);
     }
     public function create()
     {
@@ -48,6 +49,11 @@ class AttendanceService
     public function find($id)
     {
         return $this->model->find($id);
+    }
+
+    public function getAttendances($id)
+    {
+        return $this->model->with('student')->where('student_id', $id)->get();
     }
 
     public function all()

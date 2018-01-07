@@ -35,4 +35,15 @@ class SMSService
         return true;
     }
 
+    public function absentSMS($user)
+    {
+        $message = "Deer student ".$user->First_Name." ".$user->Last_Name. " you are absent to day";
+        $number  = $user->Mobile;
+
+        $status  = sendSingleSms($number,$message);
+        if($status){
+            Smsable::create(['user_id' => $user->id, 'text' => $message, 'receiver'=> $number]);
+        }
+    }
+
 }

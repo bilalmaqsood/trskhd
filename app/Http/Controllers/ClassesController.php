@@ -88,6 +88,8 @@ class ClassesController extends Controller
     public function deleteBook($id)
     {
         $book = Book::find($id);
+        $book->tests()->delete();
+        $book->exams()->delete();
         $book->delete();
     }
     public function getBooks($id)

@@ -29,12 +29,20 @@
 
     /************************ End Students Routes ***********************************************/
 
-     /************************ SMS Routes ***********************************************/
+    /************************ SMS Routes ***********************************************/
+
         Route::resource('sms' , 'SMSController');
         Route::get('single-sms' , 'SMSController@singleStudentSMS')->name('single.sms_view');
         Route::post('send/single-sms' , 'SMSController@sendSingleSMS')->name('single.sms');
 
     /************************* End SMS Routes *******************************************/
+
+        Route::get('{name}/attendance' , 'AttendanceController@userAttendance')->name('attendance');
+        Route::get('tests' , 'TestsController@userTests')->name('tests');
+        Route::get('test/details/{id}' , 'StudentsController@testDetails')->name('test.details');
+
+        Route::get('exams' , 'ExamsController@userExams')->name('exams');
+        Route::get('exam/details/{id}' , 'StudentsController@examDetails')->name('exams.details');
 
     });
     /************************ Admin Routes ***********************************************/

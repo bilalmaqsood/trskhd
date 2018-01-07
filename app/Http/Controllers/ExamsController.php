@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Trskd\Models\Book;
+use App\Trskd\Models\Exam;
 use App\Trskd\Models\Result;
 use App\Trskd\Models\SchoolClass;
 use App\Trskd\Services\ExamsService;
 use App\Trskd\Services\StudentService;
 use App\Trskd\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ExamsController extends Controller
@@ -130,5 +132,12 @@ class ExamsController extends Controller
         }
 
         return redirect()->route('exam.show' , [$exam->id]);
+    }
+
+    public function userExams()
+    {
+        $user  = Auth::user();
+        $exams = Exam::where('class_id', $user->student->class_id)->get();
+        return view('users.result', compact('exams'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Trskd\Models\Tests;
 use App\Trskd\Services\TestsService;
 use Illuminate\Http\Request;
 use App\Trskd\Services\ExamsService;
@@ -14,11 +15,11 @@ class TestsController extends Controller
     protected $service, $examService, $studentSevice, $userService;
     public function __construct(TestsService $service,ExamsService $examsService,StudentService $studentService, UserService $userService)
     {
-        $this->examService = $examsService;
-        $this->service = $service;
-        $this->studentSevice     = $studentService;
+        $this->examService   = $examsService;
+        $this->service       = $service;
+        $this->studentSevice = $studentService;
         $this->userService = $userService;
-        list($classes , $teachers , $tests , $books)     = $this->service->initialize();
+        list($classes , $teachers , $tests , $books) = $this->service->initialize();
         view()->share('classes' , $classes);
         view()->share('teachers' , $teachers);
         view()->share('tests' , $tests);
@@ -133,5 +134,12 @@ class TestsController extends Controller
 
 
         return redirect()->route('test.show' , [$test->id]);
+    }
+
+    public function userTests()
+    {
+        $user = Auth::user();
+        $tests = Tests::where('class_id', $user->student->class_id)->get();
+        return view('users.all_tests', compact('tests'));
     }
 }

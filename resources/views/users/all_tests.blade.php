@@ -11,9 +11,6 @@
             <div class="pull-left">
                 <h2>Tests All</h2>
             </div>
-            <div class="pull-right">
-                <a href="{{route('test.create')}}" class="btn btn-primary">Create Test</a>
-            </div>
         </div>
     </div>
     <div class="clear40"></div>

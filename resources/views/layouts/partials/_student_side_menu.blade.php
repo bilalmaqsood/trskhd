@@ -3,9 +3,9 @@
     <div class="widget">
         <h6 class="title">Menu</h6>
         <ul class="link">
-            <li><a href="{{route('student.index')}}">Attendance</a></li>
-            <li><a href="{{route('test.index')}}">Test Panel</a></li>
-            <li><a href="{{route('exam.index')}}">Exam Panel</a></li>
+            <li><a href="{{route('attendance' , ['name' => AUth::user()->First_Name.'-'.AUth::user()->Last_Name] )}}">Attendance</a></li>
+            <li><a href="{{route('tests')}}">Tests</a></li>
+            <li><a href="{{route('exams')}}">Exams</a></li>
             <li><a href="roll_no_slip.html">Roll No Slip</a></li>
             <li><a href="{{route('single.sms_view')}}">SMS</a></li>
             <li>

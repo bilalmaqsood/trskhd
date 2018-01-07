@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudent;
 use App\Trskd\Models\User;
+use App\Trskd\Services\ExamsService;
 use App\Trskd\Services\StudentService;
+use App\Trskd\Services\TestsService;
 use App\Trskd\Services\UserService;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
@@ -15,11 +17,14 @@ use Illuminate\Support\Facades\Gate;
 class StudentsController extends Controller
 {
 
-    protected $service ,$userService;
-    public function __construct(StudentService $studentService, UserService $userService)
+    protected $service ,$userService, $test, $exam;
+    public function __construct(StudentService $studentService, UserService $userService
+        , TestsService $testsService, ExamsService $examsService)
     {
         $this->service     = $studentService;
         $this->userService = $userService;
+        $this->test        = $testsService;
+        $this->exam        = $examsService;
         list($classes)     = $this->service->initialize();
         view()->share('classes' , $classes);
 
@@ -132,5 +137,18 @@ class StudentsController extends Controller
 
         return $pdf->stream();
 
+    }
+
+    public function testDetails($id)
+    {
+        $test = $this->test->find($id);
+        $test->load('examclass' , 'book', 'details.student');
+        return view('tests.show', compact('test'));
+    }
+
+    public function examDetails($id)
+    {
+        $test = $this->exam->find($id);
+        return view('tests.show', compact('test'));
     }
 }

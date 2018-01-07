@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Trskd\Services\AttendanceService;
 use App\Trskd\Services\ClassService;
+use App\Trskd\Services\StudentService;
+use App\Trskd\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
-    protected $service, $classService;
-    public function __construct(AttendanceService $attendanceService,ClassService $classService)
+    protected $service, $classService, $user;
+    public function __construct(AttendanceService $attendanceService,ClassService $classService, UserService $userService)
     {
         $this->service      = $attendanceService;
         $this->classService = $classService;
+        $this->user         = $userService;
 
         list($classes ) = $this->service->initialize();
         view()->share('classes' , $classes);
@@ -46,7 +49,7 @@ class AttendanceController extends Controller
     public function addStudentsAttendance(Request $request)
     {
         $students = $request->students;
-        $class_id       = $request->class_id;
+        $class_id = $request->class_id;
 
         foreach ($students as $student => $status)
         {
@@ -90,5 +93,11 @@ class AttendanceController extends Controller
 
         $attendance->delete();
         return response()->json(['success' => 'success'], 200);
+    }
+
+    public function userAttendance(Request $request)
+    {
+        $attendances = $this->service->getAttendances(Auth::user()->student->id);
+        return view('users.attendance', compact('attendances'));
     }
 }

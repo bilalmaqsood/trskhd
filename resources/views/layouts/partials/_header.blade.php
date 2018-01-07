@@ -31,7 +31,8 @@
                 </div><!-- /.navbar-collapse -->
             </div>
 
-            @if(isset(Auth::user()->id))
+
+        @if(isset(Auth::user()->id))
                 @if(Auth::user()->hasRole('admin'))
                     <!-- Start Admin Side Menu -->
                         @include('layouts.partials._side_menu')
