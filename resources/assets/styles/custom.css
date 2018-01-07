@@ -1,0 +1,358 @@
+/* Custom CSS Styles */
+body {font-family: 'Open Sans', sans-serif; background-color:#fff; font-size: 16px; width:100%; height:100%; overflow-x:hidden !important; }
+
+a, a:hover, img, img:hover, button, button:hover, i, i:hover { transition: all 0.3s ease-in-out; outline: none; }
+a:hover, a:active, a:visited, a:focus { text-decoration:none; outline: none; }
+
+img { border:0; }
+
+.clear, .clear1, .clear2, .clear3, .clear4, .clear5, .clear10, .clear20, .clear30, .clear40, .clear80 
+{ clear:both;	font-size:0px; line-height:0px; }
+.clear { height:0px; } .clear1 { height:1px; } .clear2 { height:2px; } .clear3 { height:3px; } .clear4 { height:4px; } .clear5 { height:5px; } .clear10 { height:10px; } .clear20 { height:20px; } .clear30 { height:30px; } .clear40 { height:40px; } .clear80 { height:40px; }
+
+.relative { position: relative;; }
+
+.no-padding-margin { padding:0; margin:0; }
+.no-padding { padding:0; }
+.no-margin { margin:0; }
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Montserrat', sans-serif;
+}
+/******************************** Header ********************************************/
+
+#login-modal .modal-dialog {
+    width: 350px;
+}
+
+#login-modal input[type=text], input[type=password] {
+  margin-top: 10px;
+}
+
+#div-login-msg,
+#div-lost-msg,
+#div-register-msg {
+    border: 1px solid #dadfe1;
+    height: 30px;
+    line-height: 28px;
+    transition: all ease-in-out 500ms;
+}
+
+#div-login-msg.success,
+#div-lost-msg.success,
+#div-register-msg.success {
+    border: 1px solid #68c3a3;
+    background-color: #c8f7c5;
+}
+
+#div-login-msg.error,
+#div-lost-msg.error,
+#div-register-msg.error {
+    border: 1px solid #eb575b;
+    background-color: #ffcad1;
+}
+
+#icon-login-msg,
+#icon-lost-msg,
+#icon-register-msg {
+    width: 30px;
+    float: left;
+    line-height: 28px;
+    text-align: center;
+    background-color: #dadfe1;
+    margin-right: 5px;
+    transition: all ease-in-out 500ms;
+}
+
+#icon-login-msg.success,
+#icon-lost-msg.success,
+#icon-register-msg.success {
+    background-color: #68c3a3 !important;
+}
+
+#icon-login-msg.error,
+#icon-lost-msg.error,
+#icon-register-msg.error {
+    background-color: #eb575b !important;
+}
+
+#img_logo {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: .8;
+}
+
+.modal-content {
+    background-color: #ececec;
+    border: 1px solid #bdc3c7;
+    border-radius: 0px;
+    outline: 0;
+}
+
+.modal-header {
+    min-height: 16.43px;
+    padding: 15px 15px 15px 15px;
+    border-bottom: 0px;
+}
+
+.modal-body {
+    position: relative;
+    padding: 5px 15px 5px 15px;
+}
+
+.modal-footer {
+    padding: 15px 15px 15px 15px;
+    text-align: left;
+    border-top: 0px;
+}
+
+.checkbox {
+    margin-bottom: 0px;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+}
+.btn-success {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+    color: #ffffff;
+}
+
+.btn-success:active, .btn-success.active, .btn-success.active:focus, .btn-success:active:focus, .btn-success:active:hover, .btn-success.dropdown-toggle:active:hover {
+    background-color: #4cae4c !important;
+    border-color: #4cae4c  !important;
+}
+.btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover, .open>.dropdown-toggle.btn-success.focus, .open>.dropdown-toggle.btn-success:focus, .open>.dropdown-toggle.btn-success:hover {
+    color: #fff;
+    background-color: #398439;
+    border-color: #255625;
+}
+.btn-lg, .btn-group-lg>.btn {
+    border-radius: 0px;
+}
+
+.btn-link {
+    padding: 5px 10px 0px 0px;
+    color: #95a5a6;
+}
+
+.btn-link:hover, .btn-link:focus {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.glyphicon {
+    top: 0px;
+}
+
+.form-control {
+  border-radius: 0px;
+}
+
+/*end login*/
+.block {
+    background: url(../images/pixel-60fff.png) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    border: 1px solid #ccc;
+    background: white;
+    margin: 1em 0em;
+    border-top: none;
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 6, 0.75);
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 6, 0.75);
+    box-shadow: 2px 2px 5px rgba(0, 0, 6, 0.75);
+}
+.symbol.required:before {
+    content: "*";
+    display: inline;
+    color: #E6674A;
+}
+/***************************Radio Button****************************/
+.clip-radio {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 0;
+}
+.clip-radio label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  margin-right: 15px;
+  padding-left: 25px !important;
+  position: relative;
+  margin-bottom: 6px;
+  line-height: 23px;
+}
+.clip-radio label:before {
+  background-color: #ffffff;
+  border: 1px solid #d0d0d0;
+  content: "";
+  display: inline-block;
+  height: 20px;
+  left: 0;
+  margin-right: 10px;
+  position: absolute;
+  width: 20px;
+  border-radius: 99px;
+  bottom: 2px;
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.215, 1.33) 0s;
+}
+.clip-radio label:after {
+  border: 1px solid #c8c7cc;
+  content: "";
+  display: inline-block;
+  height: 20px;
+  left: 0;
+  margin-right: 10px;
+  position: absolute;
+  width: 20px;
+  border-radius: 99px;
+  bottom: 2px;
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.215, 1.33) 0s;
+}
+.clip-radio input[type="radio"] {
+  display: none;
+}
+.clip-radio input[type="radio"]:checked + label:before {
+  border-width: 6px;
+  background: #F8F8F8;
+  border-color: #ffffff;
+}
+.clip-radio input[type="radio"][disabled] + label {
+  opacity: 0.65;
+}
+.clip-radio.radio-md label {
+  padding-left: 30px !important;
+  line-height: 28px;
+}
+.clip-radio.radio-md label:before {
+  height: 25px;
+  width: 25px;
+}
+.clip-radio.radio-md label:after {
+  height: 25px;
+  width: 25px;
+}
+.clip-radio.radio-md input[type="radio"] {
+  display: none;
+}
+.clip-radio.radio-md input[type="radio"]:checked + label:before {
+  border-width: 7px;
+}
+.clip-radio.radio-lg label {
+  padding-left: 35px !important;
+  line-height: 33px;
+}
+.clip-radio.radio-lg label:before {
+  height: 30px;
+  width: 30px;
+}
+.clip-radio.radio-lg label:after {
+  height: 30px;
+  width: 30px;
+}
+.clip-radio.radio-lg input[type="radio"] {
+  display: none;
+}
+.clip-radio.radio-lg input[type="radio"]:checked + label:before {
+  border-width: 8px;
+}
+
+.clip-radio.radio-success input[type="radio"]:checked + label:before {
+  background: #5cb85c;
+}
+
+.clip-radio.radio-primary input[type="radio"]:checked + label:before {
+  background: #007AFF;
+}
+
+.clip-radio.radio-info input[type="radio"]:checked + label:before {
+  background: #46b8da;
+}
+
+.clip-radio.radio-warning input[type="radio"]:checked + label:before {
+  background: #eea236;
+}
+
+.clip-radio.radio-danger input[type="radio"]:checked + label:before {
+  background: #d43f3a;
+}
+
+.clip-radio.radio-purple input[type="radio"]:checked + label:before {
+  background: #804C75;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 150px;
+}
+/***************************end Radio Button****************************/
+.heading_btns_area{
+    background: #f6f6f6;
+    padding: 40px 0;
+}
+
+.heading_btns_area h2{
+    margin-top: 0;
+}
+.staff_sms_area{
+    background-image: url("../../assets/images/message.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    height: 544px;
+    width: 100%;
+}
+.staff_sms_area textarea {
+    position: absolute;
+    top: 78px;
+    left: 0;
+    width: 219px;
+    right: 0;
+    margin: 0 auto;
+}
+/*footer*/
+.footer {
+  /*position: absolute;*/
+  bottom: 0;
+  /*width: 100%;*/
+  height: auto; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  padding: 15px;
+  background-color: rgb(224,160,64);
+  padding-bottom: 0px;
+}
+.copy_right{
+  margin: 0;
+  color: #fff;
+}
