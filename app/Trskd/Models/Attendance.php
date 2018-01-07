@@ -9,7 +9,7 @@ class Attendance extends Model
     protected $table = "attendance";
     public $timestamps = true;
 
-    public $fillable = ['class_id' , 'user_id' , 'student_id'];
+    public $fillable = ['class_id' , 'user_id' , 'student_id', 'status'];
 
     public function user()
     {

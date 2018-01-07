@@ -60,11 +60,27 @@ class ClassService
         $books = request()->books;
         $cls->update($data);
 
-        $cls->books()->delete();
+//        $cls->books()->delete();
 
-        foreach ($books as $book){
+        foreach ($books as $b){
 
-            $cls->books()->create(['name' => $book, 'user_id' => Auth::user()->id]);
+            if(!$b['id']){
+
+                $cls->books()->create(['name' => $b['name'], 'user_id' => Auth::user()->id]);
+
+            }else{
+
+                $book = Book::find($b['id']);
+                $book->name    = $b['name'];
+                $book->user_id = Auth::user()->id;
+                $book->save();
+            }
+
+
+            /*$cls->books()->updateOrCreate(
+                ['class_id' => $cls->id,'id' => $book[1], 'name' => $book[0], 'user_id' => Auth::user()->id],
+                ['name' => $book[0], 'user_id' => Auth::user()->id]
+            );*/
         }
 
     }

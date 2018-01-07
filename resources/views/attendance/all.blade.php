@@ -52,7 +52,7 @@
                     <th>Name</th>
                     <th>Phone No</th>
                     <th>Class NAme</th>
-                    <th>Fee</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -60,13 +60,11 @@
                     @foreach($attendances as $attendance)
                         <td>{{ isset($attendance->student) ? $attendance->student->user->First_Name.''.$attendance->student->user->Last_Name : ""}}</td>
                         <td>{{isset($attendance->student) ? $attendance->student->user->Mobile : ""}}</td>
-                        <td>{{isset($attendance->studentClass) ? $attendance->studentClass->name : ""}}</td>
-                        <td>Class One</td>
-                        <td>Yes</td>
+                        <td>{{$attendance['student']->studentClass->name}}</td>
+                        <td>{{ucfirst($attendance->status)}}</td>
                         <td>
-                            <a href="#" title="View"><i class="fa fa-eye"></i> </a>
-                            <a href="#" title="Edit"><i class="fa fa-pencil"></i> </a>
-                            <a href="#" title="Delete"><i class="fa fa-trash"></i> </a>
+                            <a href="{{route('attendance.edit' , [$attendance->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
+                            <a class="delete"  data-id="{{$attendance->id}}" href="javascript:void(0)" title="Delete" ><i class="fa fa-trash"></i> </a>
                         </td>
                     </tr>
                     @endforeach
@@ -93,5 +91,5 @@
 @endsection
 
 @section('scripts')
-    @include('partials._scripts', ['model' => 'exam'])
+    @include('partials._scripts', ['model' => 'attendance'])
 @endsection

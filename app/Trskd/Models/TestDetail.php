@@ -10,7 +10,7 @@ class TestDetail extends Model
 
     public $timestamps = true;
 
-//    protected $fillable = ['test_id', 'student_id', 'status', 'marks', 'attendance'];
+//    protected $fillable = ['checked_by','test_id', 'student_id', 'status', 'marks'];
     protected $guarded = [];
 
 

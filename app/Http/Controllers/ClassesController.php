@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Trskd\Models\Book;
 use App\Trskd\Services\ClassService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -84,6 +85,11 @@ class ClassesController extends Controller
         $cls->delete();
     }
 
+    public function deleteBook($id)
+    {
+        $book = Book::find($id);
+        $book->delete();
+    }
     public function getBooks($id)
     {
         $class = $this->service->find($id);

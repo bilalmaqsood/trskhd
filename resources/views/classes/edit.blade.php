@@ -45,15 +45,29 @@
 
                             <label class="control-label">Add Books</label>
                             <div id="books">
+                                {{--<div class="form-group">
+                                    <div class="col-md-6">
+                                        <input type="text" required name="books[0][name]" class="form-control"  placeholder="Add new book ">
+                                        <input type="hidden" value="0" name="books[0][id]" >
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <button type="button" class="add btn btn-success"> Add </button>
+                                        <button type="button" class="newDelete btn btn-danger"> Delete </button>
+                                    </div>
+
+                                </div>--}}
+                                <div class="clear10"></div>
                                 @foreach($class->books as $book)
                                     <div class="form-group">
                                         <div class="col-md-6">
-                                            <input type="text"  value="{{$book->name}}" required name="books[]" class="form-control"  placeholder="Enter book name ">
+                                            <input type="text"  value="{{$book->name}}" required name="books[{{$loop->iteration + 1}}][name]" class="form-control"  placeholder="Enter book name ">
+                                            <input type="hidden"  value="{{$book->id}}" required name="books[{{$loop->iteration + 1}}][id]" class="form-control"  placeholder="Enter book name ">
                                         </div>
 
                                         <div class="col-md-6">
-                                            <button  class="add btn btn-success"> Add </button>
-                                            <button class="delete btn btn-danger"> Delete </button>
+                                            {{--<button  class="add btn btn-success"> Add </button>--}}
+                                            <button type="button" data-id="{{$book->id}}" class="delete btn btn-danger"> Delete </button>
                                         </div>
 
                                     </div>
@@ -62,7 +76,9 @@
                             </div>
 
                             {{csrf_field()}}
-                            <button  type="submit" value="" class="btn btn-success">Update Class</button>
+                            <button type="button" class="add btn btn-success"> Add New Book</button>
+
+                            <button  type="submit" value="" class="btn btn-warning">Update Class</button>
                             <a href="{{route('classes.index')}}" class="btn btn-primary test_toggle">Show All Classes</a>
                         </form>
                     </div>
@@ -91,27 +107,69 @@
                 e.preventDefault();
                 var books = $("#books");
                 var element = '<div class="form-group">'+
-                    '<div class="col-md-6">'+
-                    '<input type="text"  required name="books[]" class="form-control"  placeholder="Enter book name ">'+
-                    '</div>'+
-                    '<div class="col-md-6">'+
-                    '<button style="margin-right: 5px" class="add btn btn-success"> Add </button>'+
-                    '<button class="delete btn btn-danger"> Delete </button>'+
-                    '</div>'+
+                        '<div class="col-md-6">'+
+                            '<input type="text"  required name="books[0][name]" class="form-control"  placeholder="Enter book name ">'+
+                            '<input type="hidden" value="0"  required name="books[0][id]" >'+
+                        '</div>'+
+                        '<div class="col-md-6">'+
+                            '<button type="button" class="newDelete btn btn-danger"> Delete </button>'+
+                        '</div>'+
                     '</div>'+
                     '<div class="clear10"></div>';
                 books.append(element);
             });
 
-            $(document).on('click' , '.delete' , function (e) {
+            $(document).on('click' , '.newDelete' , function (e) {
                 e.preventDefault();
                 $(this).closest('.form-group').remove();
-                console.log($(this).parent('.form-group'));
             });
+
+
+            $(document).on('click' , '.delete' , function (e) {
+
+                var $this = $(this);
+                var id    = $this.data('id');
+
+                swal({
+                    showLoaderOnConfirm: true,
+                    title: "Are you sure",
+                    text: "This book and all releted data will be deleted. this action can not be undo !",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#007AFF",
+                    confirmButtonText: "confirm",
+                    cancelButtonText: "cancel",
+                    closeOnConfirm: true
+                }, function() {
+                    $.ajax({
+                        url    :  '{{ str_replace('-1','',route('delete.book',-1))  }}' + id,
+                        headers: { 'X-XSRF-TOKEN' : '{{\Illuminate\Support\Facades\Crypt::encrypt(csrf_token())}}' },
+                        error: function() {
+                            swal("Cancelled", "Unable to delete ", "error");
+                        },
+                        success: function(response) {
+
+                            swal("Success", "Deleted successfully !", "success");
+//                    tr.remove();
+                            location.reload();
+                            if(response.success == 'true'){
+                            }else{
+                            }
+                        },
+
+                        type: 'POST'
+                    });
+                });
+
+
+            });
+
 
         })
 
     </script>
 
+
 @endsection
+
 

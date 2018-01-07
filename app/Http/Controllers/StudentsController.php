@@ -28,8 +28,6 @@ class StudentsController extends Controller
 
     public function index()
     {
-
-        
         $this->authorize('all');
 
         $this->service->allStudents();

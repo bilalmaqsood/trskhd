@@ -11,12 +11,12 @@
             <li><a href="calendar.html">Holiday Calendar</a></li>
             <li><a href="{{route('test.index')}}">Test Panel</a></li>
             <li><a href="{{route('exam.index')}}">Exam Panel</a></li>
-            <li><a href="roll_no_slip.html">Roll No Slip</a></li>
+            {{--<li><a href="roll_no_slip.html">Roll No Slip</a></li>--}}
             <li><a href="{{route('single.sms_view')}}">One Student SMS</a></li>
-            <li><a href="students_sms.html">All Student SMS</a></li>
-            <li><a href="staff_sms.html">All Staff SMS</a></li>
-            <li><a href="sms_details.html">SMS Details</a></li>
-            <li><a href="section_strength_analysis.html">Strength Analysis</a></li>
+            <li><a href="{{route('sms.index')}}">SMS Details</a></li>
+            <li><a href="{{route('SendAllStudentsSms')}}">All Student SMS</a></li>
+            <li><a href="{{route('SendAllStaffSms')}}">All Staff SMS</a></li>
+            {{--<li><a href="section_strength_analysis.html">Strength Analysis</a></li>--}}
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
             </li>

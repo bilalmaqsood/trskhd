@@ -31,9 +31,21 @@
                 </div><!-- /.navbar-collapse -->
             </div>
 
-            <!-- Start Side Menu -->
-        @include('layouts.partials._side_menu')
-        <!-- End Side Menu -->
+            @if(isset(Auth::user()->id))
+                @if(Auth::user()->hasRole('admin'))
+                    <!-- Start Admin Side Menu -->
+                        @include('layouts.partials._side_menu')
+                    <!-- End admin Side Menu -->
+                @elseif(Auth::user()->hasRole('student'))
+                    <!-- Start Student Side Menu -->
+                        @include('layouts.partials._student_side_menu')
+                    <!-- End admin Side Menu -->
+                @elseif('teacher')
+                    <!-- Start Student Side Menu -->
+                        @include('layouts.partials._staff_side_menu')
+                    <!-- End admin Side Menu -->
+                @endif
+            @endif
         </nav>
         <!-- End Navigation -->
     </div>

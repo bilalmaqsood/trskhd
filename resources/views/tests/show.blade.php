@@ -47,7 +47,7 @@
                             <td>{{$test['book']->name}}</td>
                             <td>{{$test->Total_Marks}}</td>
                             <td>{{$test->Passing_Marks}}</td>
-                            <td>50</td>
+                            <td>{{$detail->marks}}</td>
                         </tr>
                     @endforeach
                 </tbody>

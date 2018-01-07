@@ -55,5 +55,15 @@ class AuthServiceProvider extends ServiceProvider
             $user = Auth::user();
             return $user->hasRole('admin');
         });
+
+        Gate::define('student', function () {
+            $user = Auth::user();
+            return $user->hasRole('student');
+        });
+
+        Gate::define('teacher', function () {
+            $user = Auth::user();
+            return $user->hasRole('teacher');
+        });
     }
 }

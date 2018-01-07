@@ -55,4 +55,10 @@ class AttendanceService
         return $this->model->all();
     }
 
+    public function update($attendance)
+    {
+
+        $attendance->update(request()->all());
+    }
+
 }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Trskd\Services\ExamsService;
 use App\Trskd\Services\StudentService;
 use App\Trskd\Services\UserService;
+use Illuminate\Support\Facades\Auth;
+
 class TestsController extends Controller
 {
     protected $service, $examService, $studentSevice, $userService;
@@ -79,9 +81,17 @@ class TestsController extends Controller
         $class = [];
 
         if($test){
+
             $test->load('examclass.students');
             $class = $test['examclass'];
         }
+
+        if($test->has('details')){
+
+            $test->load('details');
+            return view('tests.update' , compact('test', 'class'));
+        }
+
         return view('tests.details', compact('test', 'class'));
     }
 
@@ -91,13 +101,31 @@ class TestsController extends Controller
 
         if($test){
             $details = $request->details;
-
-
             foreach ($details as $key => $detail) {
                $test->details()->create([
-                   'attendance' => $detail['attendance'],
+                   'checked_by' => Auth::user()->id,
                    'marks' => $detail['marks'],
-//                   'status' => $detail['status'],
+                   'status' => $detail['status'],
+                   'student_id' => $detail['student_id'],
+               ]);
+            }
+        }
+
+
+        return redirect()->route('test.show' , [$test->id]);
+    }
+
+    public function updateTestMarks(Request $request, $id)
+    {
+        $test = $this->service->find($id);
+
+        if($test){
+            $details = $request->details;
+            foreach ($details as $key => $detail) {
+               $test->details()->update([
+                   'checked_by' => Auth::user()->id,
+                   'marks' => $detail['marks'],
+                   'status' => $detail['status'],
                    'student_id' => $detail['student_id'],
                ]);
             }

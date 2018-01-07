@@ -16,7 +16,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">{{$class->name}}</div>
                 <div class="panel-body">
-                    <form method="post" action="{{route('addTestMarks' ,[$test->id])}}">
+                    <form method="post" action="{{route('updateTestMarks' ,[$test->id])}}">
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -43,10 +43,10 @@
                                     <td>{{$student->user->First_Name.' '.$student->user->Last_Name }}</td>
                                     <td>{{$student->user->Gender}}</td>
                                     <input type="hidden" name="details[{{$loop->index}}][student_id]" value="{{$student->id}}" >
-                                    <td> <input type="radio" name="details[{{$loop->index}}][status]" value="absent"> </td>
-                                    <td> <input type="radio" name="details[{{$loop->index}}][status]" value="pass"> </td>
-                                    <td> <input type="radio" name="details[{{$loop->index}}][status]" value="fail"> </td>
-                                    <td> <input type="number" name="details[{{$loop->index}}][marks]"  class="form-control" placeholder="Obtained Marks"> </td>
+                                    <td> <input type="radio" {{$student->testStatus($test->id, $student->id) == "absent" ? "checked" : ""}} name="details[{{$loop->index}}][status]" value="absent"> </td>
+                                    <td> <input type="radio" {{$student->testStatus($test->id, $student->id) == "pass" ? "checked" : ""}} name="details[{{$loop->index}}][status]" value="pass"> </td>
+                                    <td> <input type="radio" {{$student->testStatus($test->id, $student->id) == "fail" ? "checked" : ""}} name="details[{{$loop->index}}][status]" value="fail"> </td>
+                                    <td> <input type="number" name="details[{{$loop->index}}][marks]" value="{{$student->testObtainedMarks($test->id, $student->id)}}" class="form-control" placeholder="Obtained Marks"> </td>
                                     <td> {{$test->Total_Marks}}</td>
                                     <td> {{$test->Passing_Marks}}</td>
                                 </tr>

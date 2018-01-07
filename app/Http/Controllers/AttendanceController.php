@@ -22,6 +22,11 @@ class AttendanceController extends Controller
     public function index()
     {
         $attendances = $this->service->all();
+
+        if($attendances){
+            $attendances->load('student');
+        }
+
         return view('attendance.all' , compact('attendances'));
     }
 
@@ -40,12 +45,13 @@ class AttendanceController extends Controller
     }
     public function addStudentsAttendance(Request $request)
     {
-        $absentStudents = $request->students;
+        $students = $request->students;
         $class_id       = $request->class_id;
 
-        foreach ($absentStudents as $student => $status)
+        foreach ($students as $student => $status)
         {
-            $data = ['class_id' => $class_id , 'student_id' => $student ,'user_id' => Auth::user()->id];
+            $data = ['class_id' => $class_id, 'status' => $status,
+                'student_id' => $student, 'user_id' => Auth::user()->id];
             $this->service->addAttendanceStatus($data);
         }
         return redirect()->route('home');
@@ -64,11 +70,25 @@ class AttendanceController extends Controller
     public function edit($id)
     {
         $attendance = $this->service->find($id);
+        if($attendance) {
 
+            $attendance->load('student');
+        }
         return view('attendance.edit' , compact('attendance'));
     }
-    public function update()
+    public function update($id)
     {
-        $this->service->update();
+        $attendance = $this->service->find($id);
+        $this->service->update($attendance);
+
+        return redirect()->route('attendance.index');
+    }
+
+    public function destroy($id)
+    {
+        $attendance = $this->service->find($id);
+
+        $attendance->delete();
+        return response()->json(['success' => 'success'], 200);
     }
 }

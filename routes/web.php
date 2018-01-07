@@ -11,7 +11,7 @@
 |
 */
 
-
+    Route::middleware(['auth', 'status'])->group(function (){
     /************************ Teachers Routes ***********************************************/
         Route::get('salary/slip/{id}' , 'TeachersController@viewSalarySlip')->name('view_salary_slip');
         Route::get('download/salary/slip/{id}' , 'TeachersController@downloadSalarySlip')->name('download_salary_slip');
@@ -36,10 +36,10 @@
 
     /************************* End SMS Routes *******************************************/
 
-
+    });
     /************************ Admin Routes ***********************************************/
 
-        Route::middleware(['auth'])->prefix('admin')->group(function (){
+        Route::middleware(['auth', 'status'])->prefix('admin')->group(function (){
 
             Route::resource('student' , 'StudentsController');
             Route::resource('teacher' , 'TeachersController');
@@ -63,6 +63,7 @@
                 /************************ Classes Routes ***********************************************/
                 Route::resource('classes' , 'ClassesController');
                 Route::post('get/books/{id}' , 'ClassesController@getBooks')->name('get.books');
+                Route::post('delete/books/{id}' , 'ClassesController@deleteBook')->name('delete.book');
 
                 Route::prefix('classes')->group(function (){
                 });
@@ -76,6 +77,7 @@
                 Route::resource('test' , 'TestsController');
                 Route::get('test/details/{id}' , 'TestsController@viewDetails')->name('testDetails');
                 Route::post('test/details/{id}' , 'TestsController@addTestMarks')->name('addTestMarks');
+                Route::post('test/details/update/{id}' , 'TestsController@updateTestMarks')->name('updateTestMarks');
 
                 Route::get('report', 'TestsController@report')->name('test.report');
 
@@ -90,7 +92,12 @@
                 Route::get('change/logo' , 'HomeController@logo')->name('logo');
                 Route::post('change/logo' , 'HomeController@changeLogo')->name('change.logo');
 
+                Route::resource('sms' , 'SMSController');
+                Route::get('all/staff/sms', 'SMSController@SendAllStaffSms')->name('SendAllStaffSms');
+                Route::post('all/staff/sms', 'SMSController@staffAll')->name('staff.all');
 
+                Route::get('all/student/sms', 'SMSController@SendAllStudentSms')->name('SendAllStudentsSms');
+                Route::post('all/student/sms', 'SMSController@studentAll')->name('students.all');
             });
 
         });

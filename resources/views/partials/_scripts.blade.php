@@ -25,7 +25,7 @@
                 success: function(response) {
 
                     swal("Success", "Deleted successfully !", "success");
-                    tr.remove();
+//                    tr.remove();
                     location.reload();
                     if(response.success == 'true'){
                     }else{

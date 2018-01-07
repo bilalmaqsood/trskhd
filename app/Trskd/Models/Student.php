@@ -20,9 +20,27 @@ class Student extends Model
         return $this->belongsToMany(SchoolClass::class,'class_student','student_id','class_id');
     }
 
+    public function studentClass()
+    {
+        return $this->belongsTo(SchoolClass::class, 'class_id' , 'id');
+    }
     public function fees()
     {
         return $this->hasMany(Fee::class, 'student_id', 'id');
+    }
+
+    public function testObtainedMarks($testId, $studentId)
+    {
+            $testDetails = TestDetail::where('test_id', $testId)->where('student_id', $studentId)->first();
+
+            return $testDetails->marks;
+    }
+
+    public function testStatus($testId, $studentId)
+    {
+            $testDetails = TestDetail::where('test_id', $testId)->where('student_id', $studentId)->first();
+
+            return $testDetails->status;
     }
 
 }

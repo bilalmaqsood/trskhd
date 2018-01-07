@@ -47,7 +47,7 @@
                             </tbody>
                         </table>
                         {{csrf_field()}}
-                        <button type="submit" class="btn btn-success">Save Result</button>
+                        <button type="submit" class="btn btn-success">Create Exam</button>
                     </form>
                 </div>
             </div>
