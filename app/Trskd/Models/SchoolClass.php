@@ -31,6 +31,11 @@ class SchoolClass extends Model
         return $this->hasMany(Book::class , 'class_id' , 'id');
     }
 
+    public function latestExam()
+    {
+        return $this->hasMany(Exam::class, 'class_id', 'id')->latest();
+    }
+
     public function tests()
     {
         return $this->hasMany(Tests::class ,'class_id');

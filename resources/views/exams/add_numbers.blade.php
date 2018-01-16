@@ -16,7 +16,7 @@
     <div class="container">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-primary">
-                <div class="panel-heading">{{$book->name}}</div>
+                <div class="panel-heading">{{$book->name . ", Total Marks = ". $details->Total_Marks .",  Passing Marks = " .$details->Passing_Marks }} </div>
                 <div class="panel-body">
                     <form method="POST" action="{{route('storeNumbers' ,[$exam->id])}}">
                         <table class="table">

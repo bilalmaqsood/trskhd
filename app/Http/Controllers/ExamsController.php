@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Trskd\Models\Book;
 use App\Trskd\Models\Exam;
+use App\Trskd\Models\ExamDetails;
 use App\Trskd\Models\Result;
 use App\Trskd\Models\SchoolClass;
 use App\Trskd\Services\ExamsService;
@@ -48,6 +49,7 @@ class ExamsController extends Controller
             'Type' => 'required|max:255',
             'Start_Date' => 'required|date',
             'End_Date' => 'required|date',
+
         ]);
 
         if ($validator->fails()) {
@@ -64,6 +66,7 @@ class ExamsController extends Controller
     }
     public function store()
     {
+
         $exam = $this->examService->create();
         return redirect()->route('exam.index');
 
@@ -102,8 +105,10 @@ class ExamsController extends Controller
     public function addNumbers($exam, $book)
     {
         $exam = $this->examService->find($exam);
+
         $book = Book::find($book);
 
+        $details = ExamDetails::where('exam_id' , $exam->id)->where('book_id', $book->id)->first();
         $result = Result::where('exam_id', $exam->id)
             ->where('book_id', $book->id)
             ->where('class_id', $exam->class_id)
@@ -118,7 +123,7 @@ class ExamsController extends Controller
 
         }
 
-        return view('exams.add_numbers', compact('exam' , 'book','class'));
+        return view('exams.add_numbers', compact('exam' , 'book','class','details'));
     }
 
     public function storeExamNumbers($id)
@@ -140,4 +145,6 @@ class ExamsController extends Controller
         $exams = Exam::where('class_id', $user->student->class_id)->get();
         return view('users.result', compact('exams'));
     }
+
+
 }

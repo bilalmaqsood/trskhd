@@ -14,7 +14,7 @@
     </div>
     <div class="clear40"></div>
     <div class="container">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">{{$class->name . " Books"}}</div>
                 <div class="panel-body">
@@ -27,8 +27,9 @@
                                 <th>Date</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
+                                <th>Total Marks</th>
+                                <th>Passing Marks</th>
                                 <th>Room No</th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -36,14 +37,15 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td><a href="javascript:void(0)">{{$book->name}}</a></td>
-                                        <td><input type="date" name="Details[{{$loop->index}}][Date]"></td>
-                                        <td><input type="time" name="Details[{{$loop->index}}][Start_Time]"></td>
-                                        <td><input type="time" name="Details[{{$loop->index}}][End_Time]"></td>
-                                        <td> <input type="text" name="Details[{{$loop->index}}][Room]" > </td>
-                                        <input type="hidden" name="Details[{{$loop->index}}][book_id]" value="{{$book->id}}">
+                                        <td><input  required type="date" name="Details[{{$loop->index}}][Date]"></td>
+                                        <td><input  required type="time" name="Details[{{$loop->index}}][Start_Time]"></td>
+                                        <td><input  required type="time" name="Details[{{$loop->index}}][End_Time]"></td>
+                                        <td><input  required type="number" name="Details[{{$loop->index}}][Total_Marks]"></td>
+                                        <td><input  required type="number" name="Details[{{$loop->index}}][Passing_Marks]"></td>
+                                        <td> <input   type="text" name="Details[{{$loop->index}}][Room]" > </td>
+                                        <input  type="hidden" name="Details[{{$loop->index}}][book_id]" value="{{$book->id}}">
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                         {{csrf_field()}}

@@ -87,4 +87,9 @@ class HomeController extends Controller
 
 
     }
+
+    public function calender()
+    {
+        return view('calender');
+    }
 }
