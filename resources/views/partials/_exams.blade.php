@@ -24,9 +24,7 @@
             <td>{{count($exam->details)}}</td>
             <td>
                 @if(Auth::user()->hasRole('admin'))
-
                     <a href="{{route('exam.show' , [$exam->id])}}" title="View"><i class="fa fa-eye"></i> </a>
-                    <a href="{{route('exam.edit' , [$exam->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
                     <a href="#" title="Download Exam"><i class="fa fa-download"></i> </a>
                     <a href="#" title="Download Roll No Slip"><i class="fa fa-cloud-download"></i> </a>
                     <a href="javascript:void(0)" data-id="{{$exam->id}}" class="delete" title="Delete"><i class="fa fa-trash"></i> </a>

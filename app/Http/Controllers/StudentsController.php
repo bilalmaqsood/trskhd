@@ -151,4 +151,26 @@ class StudentsController extends Controller
         $test = $this->exam->find($id);
         return view('tests.show', compact('test'));
     }
+
+    public function result($id)
+    {
+        $student = $this->service->find($id);
+        if($student){
+
+            $student->load('user' , 'studentClass.books');
+        }
+        $result = 0;
+        return view('exams.result' , compact('student', 'result'));
+    }
+
+    public function feeSlip($id)
+    {
+        $student = $this->service->find($id);
+        if($student){
+
+            $student->load('user');
+        }
+
+        return view('students.fee_slip' ,compact('student'));
+    }
 }

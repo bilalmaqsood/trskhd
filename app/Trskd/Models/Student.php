@@ -24,6 +24,8 @@ class Student extends Model
     {
         return $this->belongsTo(SchoolClass::class, 'class_id' , 'id');
     }
+
+
     public function fees()
     {
         return $this->hasMany(Fee::class, 'student_id', 'id');
@@ -38,9 +40,24 @@ class Student extends Model
 
     public function testStatus($testId, $studentId)
     {
-            $testDetails = TestDetail::where('test_id', $testId)->where('student_id', $studentId)->first();
+        $testDetails = TestDetail::where('test_id', $testId)->where('student_id', $studentId)->first();
 
-            return $testDetails->status;
+        return $testDetails->status;
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'class_id', 'id');
+    }
+
+    public function getSmsChargesAttribute()
+    {
+        $user = $this['user']->id;
+
+        $currentMonth = date('m');
+        $totalSms = Smsable::whereRaw('MONTH(created_at) = ?',[$currentMonth])->where('user_id', $user)->count();
+
+        return ($totalSms * 5);
     }
 
 }

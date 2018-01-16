@@ -27,6 +27,10 @@
 
         Route::get('student/{id}/download/slip' , 'StudentsController@downloadRollNoSlip')->name('student.downloadSlip');
 
+        Route::get('student/{id}/fee/slip' , 'StudentsController@feeSlip')->name('studentFeeSlip');
+
+        Route::get('result/{id}' , 'StudentsController@result')->name('student.result');
+
     /************************ End Students Routes ***********************************************/
 
     /************************ SMS Routes ***********************************************/
@@ -115,5 +119,7 @@
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::post('password/change', 'UsersController@passwordReset')->name('password.mobile');
+
+    Route::get('calender', 'HomeController@calender')->name('calender');
 
     Auth::routes();

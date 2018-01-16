@@ -13,7 +13,6 @@
         <form method="post" action="{{route('exam.update' , [$exam->id])}}" >
 
             <div class="create_test_area">
-
                 <div class="container">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="panel panel-primary">
@@ -28,6 +27,8 @@
                                             <th>Start Date</th>
                                             <th>Start Time</th>
                                             <th>End Time</th>
+                                            <th>Total Marks</th>
+                                            <th>Passing Marks</th>
                                             <th>Room No</th>
                                         </tr>
                                         </thead>
@@ -39,6 +40,8 @@
                                                 <td>{{$detail->Date}}</td>
                                                 <td>{{$detail->Start_Time}}</td>
                                                 <td>{{$detail->End_Time}}</td>
+                                                <td>{{$detail->Total_Marks}}</td>
+                                                <td>{{$detail->Passing_Marks}}</td>
                                                 <td> {{$detail->Room}} </td>
                                                 <input type="hidden" value="{{$detail->book_id}}" name="Details[{{$loop->index}}][book_id]" >
                                             </tr>

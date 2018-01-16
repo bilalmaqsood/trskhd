@@ -11,7 +11,7 @@ class Exam extends Model
     public $timestamps = true;
 //    protected $dates = ['Start_Date'];
 
-    protected $fillable = [ 'user_id','class_id', 'teacher_id' ,'Type' , 'Name', 'Year','Start_Date', 'End_Date',];
+    protected $fillable = [ 'user_id','class_id', 'teacher_id' ,'Type' , 'Name', 'Year','Start_Date', 'End_Date','Total_Marks', 'Passing_Marks'];
 
     public function user()
     {
