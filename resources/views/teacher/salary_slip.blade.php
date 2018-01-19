@@ -39,7 +39,7 @@
                 <p>Date</p>
             </div>
             <div class="col-md-9">
-                <p><strong>12-12-2017</strong></p>
+                <p><strong>{{$date}}</strong></p>
             </div>
             <div class="clearfix"></div>
             <table class="table table-striped table-bordered">
@@ -54,32 +54,14 @@
                 <tr>
                     <td>Basic Salary</td>
                     <td>{{$teacher->Salary}}</td>
-                    <td>Provident Fund</td>
-                    <td>250</td>
-                </tr>
-                <tr>
-                    <td>HRA</td>
-                    <td>2000</td>
-                    <td>E.S.I</td>
-                    <td>250</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>12000</td>
-                    <td>Loan</td>
-                    <td>250</td>
-                </tr>
-                <tr>
-                    <td>Basic Salary</td>
-                    <td>12000</td>
-                    <td>Professional Tax</td>
-                    <td>250</td>
+                    <td>Leaves ({{$teacher->Leaves}})</td>
+                    <td>{{$teacher->LeavesFine}}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td><strong>Net Salary</strong></td>
-                    <td>11000</td>
+                    <td>{{$teacher->netSalary}}</td>
                 </tr>
                 </tbody>
                 </thead>

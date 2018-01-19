@@ -54,10 +54,13 @@ class Student extends Model
     {
         $user = $this['user']->id;
 
-        $currentMonth = date('m');
-        $totalSms = Smsable::whereRaw('MONTH(created_at) = ?',[$currentMonth])->where('user_id', $user)->count();
+        $salaryMonth = Carbon::now();
+        $monthStart  = $salaryMonth->startOfMonth()->format('Y-m-d');
+        $monthEnd    = $salaryMonth->endOfMonth()->format('Y-m-d');
 
-        return ($totalSms * 5);
+        $totalSms    = Smsable::whereBetween('created_at', array($monthStart, $monthEnd))->count();
+
+        return ($totalSms * SMSCharges);
     }
 
 }

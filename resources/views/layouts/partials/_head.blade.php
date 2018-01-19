@@ -20,7 +20,7 @@
 <link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/sweet-alert.css">
 <link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/toastr.min.css">
 <link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/bootstrap-imageupload.min.css">
-<link href="dist/css/bootstrap-imageupload.css" rel="stylesheet">
+{{--<link href="{{asset('')}}dist/css/bootstrap-imageupload.css" rel="stylesheet">--}}
 <link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/style.css">
 <link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/custom.css">
 <link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/responsive.css">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Trskd\Models\Teacher;
+use App\Trskd\Models\TeacherAttendance;
 use App\Trskd\Services\AttendanceService;
 use App\Trskd\Services\ClassService;
 use App\Trskd\Services\StudentService;
@@ -57,7 +59,7 @@ class AttendanceController extends Controller
                 'student_id' => $student, 'user_id' => Auth::user()->id];
             $this->service->addAttendanceStatus($data);
         }
-        return redirect()->route('home');
+        return redirect()->route('attendance.index');
     }
 
     public function create()
@@ -99,5 +101,31 @@ class AttendanceController extends Controller
     {
         $attendances = $this->service->getAttendances(Auth::user()->student->id);
         return view('users.attendance', compact('attendances'));
+    }
+
+    public function teachersAttendance()
+    {
+        $attendances = TeacherAttendance::all();
+        return view('attendance.all_teachers', compact('attendances'));
+    }
+    public function showTeachers()
+    {
+        $teachers = Teacher::all();
+        return view('attendance.teacher', compact('teachers'));
+
+    }
+
+    public function addTeacherAttendanceStatus(Request $request)
+    {
+        $teachers = $request->teachers;
+
+        foreach ($teachers as $teacher => $status)
+        {
+            $data = ['status' => $status, 'teacher_id' => $teacher, 'user_id' => Auth::user()->id];
+
+            $this->service->addTeacherAttendanceStatus($data);
+
+            return redirect()->route('teachersAttendance');
+        }
     }
 }

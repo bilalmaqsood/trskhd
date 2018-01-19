@@ -11,6 +11,9 @@
             <div class="pull-left">
                 <h2>Attendance Details</h2>
             </div>
+            <div class="pull-right">
+                <a href="{{route('attendance_classes')}}" class="btn btn-primary">Attendance</a>
+            </div>
         </div>
     </div>
     <div class="container">

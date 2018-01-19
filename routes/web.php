@@ -62,6 +62,9 @@
                 Route::get('all/class/students' , 'AttendanceController@showClassesStudents')->name('attendance_class_students');
                 Route::post('add/students/attendance' , 'AttendanceController@addStudentsAttendance')->name('add_attendance');
 
+                Route::get('all/teachers/attendance', 'AttendanceController@teachersAttendance')->name('teachersAttendance');
+                Route::get('teachers/attendance' , 'AttendanceController@showTeachers')->name('teacher-attendance');
+                Route::post('add/teachers/attendance' , 'AttendanceController@addTeacherAttendanceStatus')->name('add-teacher-attendance');
 
                 /************************ Fee Routes ***********************************************/
                 Route::resource('fee' , 'FeesController');
@@ -121,5 +124,7 @@
     Route::post('password/change', 'UsersController@passwordReset')->name('password.mobile');
 
     Route::get('calender', 'HomeController@calender')->name('calender');
+    Route::post('calender/add-holiday', 'HomeController@calenderAddHoliday')->name('calenderAddHoliday');
+    Route::post('calender/holidays', 'HomeController@calenderGetHolidays')->name('GetHolidays');
 
     Auth::routes();

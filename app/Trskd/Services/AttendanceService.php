@@ -11,6 +11,8 @@ namespace App\Trskd\Services;
 
 use App\Trskd\Models\Attendance;
 use App\Trskd\Models\SchoolClass;
+use App\Trskd\Models\Teacher;
+use App\Trskd\Models\TeacherAttendance;
 
 
 class AttendanceService
@@ -36,8 +38,17 @@ class AttendanceService
     {
         $attendance = $this->model->create($data);
         $student = $this->studentService->find($data['student_id']);
-        $this->sms->absentSMS($student->user);
+        $this->sms->absentSMS($student->user, 'Student');
     }
+
+    public function addTeacherAttendanceStatus($data)
+    {
+        $attendance = TeacherAttendance::create($data);
+
+        $teacher = Teacher::find($data['teacher_id']);
+        $this->sms->absentSMS($teacher->user , 'Teacher');
+    }
+
     public function create()
     {
         $data    = request()->all();
