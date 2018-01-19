@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateTeacher;
 use App\Trskd\Models\SchoolClass;
+use App\Trskd\Models\TeacherAttendance;
 use App\Trskd\Services\TeacherService;
 use App\Trskd\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\App;
@@ -99,7 +101,8 @@ class TeachersController extends Controller
         $this->authorize('view');
         $this->service->find($id);
 
-        return view('teacher.salary_slip');
+        $date = Carbon::now()->format('Y-m-d');
+        return view('teacher.salary_slip', compact('date'));
     }
 
     public function downloadSalarySlip($id)

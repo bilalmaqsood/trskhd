@@ -2,6 +2,7 @@
 
 namespace App\Trskd\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
@@ -27,8 +28,42 @@ class Teacher extends Model
         return $this->belongsToMany(SchoolClass::class,'class_teacher','teacher_id','class_id');
     }
 
-   /* public function classes()
+    public function teacherClass()
     {
-        return $this->hasMany(SchoolClass::class);
-    }*/
+        return $this->belongsTo(SchoolClass::class, 'class_id', ' id');
+    }
+
+    public function getLeavesAttribute()
+    {
+        $salaryMonth = Carbon::now();
+        $monthStart = $salaryMonth->startOfMonth()->format('Y-m-d');
+        $monthEnd   = $salaryMonth->endOfMonth()->format('Y-m-d');
+
+        $attendance = TeacherAttendance::whereBetween('created_at', array($monthStart, $monthEnd))->where('status','absent')->count();
+
+        return $attendance ;
+    }
+    public function getLeavesFineAttribute()
+    {
+        $attendance = $this->getLeavesAttribute();
+        return ($attendance > 1) ? ($attendance - 1 ) * TeacherLeaveFine : '0';
+    }
+
+    public function getSmsChargesAttribute()
+    {
+        $user = $this['user']->id;
+
+        $salaryMonth = Carbon::now();
+        $monthStart  = $salaryMonth->startOfMonth()->format('Y-m-d');
+        $monthEnd    = $salaryMonth->endOfMonth()->format('Y-m-d');
+
+        $totalSms    = Smsable::whereBetween('created_at', array($monthStart, $monthEnd))->count();
+
+        return ($totalSms * SMSCharges);
+    }
+
+    public function getNetSalaryAttribute()
+    {
+        return $this->Salary - $this->getLeavesFineAttribute() - $this->getSmsChargesAttribute();
+    }
 }

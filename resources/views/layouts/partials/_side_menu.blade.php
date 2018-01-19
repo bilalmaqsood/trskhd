@@ -7,7 +7,8 @@
             <li><a href="{{route('teacher.index')}}">Teachers</a></li>
             <li><a href="{{route('classes.index')}}">Classes</a></li>
             <li><a href="{{route('fee.index')}}">Fees</a></li>
-            <li><a href="{{route('attendance.index')}}">Attendance</a></li>
+            <li><a href="{{route('attendance.index')}}">Students Attendance</a></li>
+            <li><a href="{{route('teachersAttendance')}}">Teachers Attendance</a></li>
             <li><a href="calendar.html">Holiday Calendar</a></li>
             <li><a href="{{route('test.index')}}">Test Panel</a></li>
             <li><a href="{{route('exam.index')}}">Exam Panel</a></li>

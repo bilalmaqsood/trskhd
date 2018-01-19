@@ -47,10 +47,10 @@
             });
     }
 
-    var $imageupload = $('.imageupload');
+    /*var $imageupload = $('.imageupload');
     $imageupload.imageupload({
         maxFileSizeKb: 2048
-    });
+    });*/
 
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();

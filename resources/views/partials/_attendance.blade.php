@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     @foreach($attendances as $attendance)
-        <td>{{ isset($attendance->student) ? $attendance->student->user->First_Name.''.$attendance->student->user->Last_Name : ""}}</td>
+        <td>{{ isset($attendance->student) ? $attendance->student->user->First_Name.' '.$attendance->student->user->Last_Name : ""}}</td>
         <td>{{isset($attendance->student) ? $attendance->student->user->Mobile : ""}}</td>
         <td>{{$attendance['student']->studentClass->name}}</td>
         <td>{{ucfirst($attendance->status)}}</td>

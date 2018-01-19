@@ -28,22 +28,22 @@ class SMSService
         $number  = $user->Mobile;
 
         $status  = sendSingleSms($number,$message);
-        if($status){
+        /*if($status){
             Smsable::create(['user_id' => $user->id, 'text' => $message, 'receiver'=> $number]);
-        }
+        }*/
 
         return true;
     }
 
-    public function absentSMS($user)
+    public function absentSMS($user , $type)
     {
-        $message = "Deer student ".$user->First_Name." ".$user->Last_Name. " you are absent to day";
+        $message = "Dear {$type} ".$user->First_Name." ".$user->Last_Name. " you are absent to day";
         $number  = $user->Mobile;
 
         $status  = sendSingleSms($number,$message);
-        if($status){
+        /*if($status){
             Smsable::create(['user_id' => $user->id, 'text' => $message, 'receiver'=> $number]);
-        }
+        }*/
     }
 
 }

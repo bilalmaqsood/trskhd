@@ -53,4 +53,9 @@ class SchoolClass extends Model
             $user->where('Gender', 'male');
         }])->count();
     }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class,'class_id', 'id');
+    }
 }

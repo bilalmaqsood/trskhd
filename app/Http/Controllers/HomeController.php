@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Trskd\Models\Calendar;
 use App\Trskd\Models\Logo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -91,5 +93,29 @@ class HomeController extends Controller
     public function calender()
     {
         return view('calender');
+    }
+
+    public function calenderAddHoliday(Request $request)
+    {
+
+        $data = $request->except('_token');
+        $data['user_id'] = Auth::id();
+
+        $event = Calendar::create($data);
+
+        return $data;
+        return response()->json(['success' => 'success'], 200)->header('Content-Type', 'text/plain');
+        return (request()->description);
+    }
+
+    public function calenderGetHolidays()
+    {
+        $currentMonth = Carbon::now();
+        $monthStart   =  $currentMonth->startOfMonth()->format('Y-m-d');
+        $monthEnd     =  $currentMonth->endOfMonth()->format('Y-m-d');
+
+        $holidays    = Calendar::whereBetween('created_at', array($monthStart, $monthEnd))->get()->toArray();
+
+        return $holidays;
     }
 }
