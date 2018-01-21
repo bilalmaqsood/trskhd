@@ -76,9 +76,9 @@ class UserService
         return $name;
     }
 
-    public function findByMobile($mobile)
+    public function findByUserName($username)
     {
-        return User::where('Mobile' , $mobile)->first();
+        return User::where('username' , $username)->first();
     }
 
     public function newPassword()
@@ -88,8 +88,8 @@ class UserService
 
     public function resetPassword()
     {
-        $mobile = request()->Mobile;
-        $user   = $this->findByMobile($mobile);
+        $username = request()->username;
+        $user   = $this->findByUserName($username);
 
         if(!$user){
 
@@ -99,7 +99,7 @@ class UserService
         $name   = $user->First_Name.' '.$user->Last_Name;
         $newPassword = str_random(6);
 
-        $response = $this->sms->passwordResetSMS($mobile, $newPassword,$name);
+        $response = $this->sms->passwordResetSMS($user->Mobile, $newPassword,$name);
 
         if($response){
 

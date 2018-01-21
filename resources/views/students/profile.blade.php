@@ -42,7 +42,7 @@
                             <dt>Registration ID</dt>
                         </div>
                         <div class="col-md-6">
-                            <dd>{{$student->Registration_ID}}</dd>
+                            <dd>{{$student->id}}</dd>
                         </div>
                         <div class="clearfix"></div>
                         <hr>
@@ -51,6 +51,14 @@
                         </div>
                         <div class="col-md-6">
                             <dd>{{$student['user']->First_Name ." ". $student['user']->Last_Name }}</dd>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-md-6">
+                            <dt>User Name</dt>
+                        </div>
+                        <div class="col-md-6">
+                            <dd>{{$student['user']->username }}</dd>
                         </div>
                         <div class="clearfix"></div>
                         <hr>

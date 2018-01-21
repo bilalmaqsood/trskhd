@@ -21,7 +21,7 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>RegID</th>
+                                {{--<th>RegID</th>--}}
                                 <th>Book</th>
                                 <th>Name</th>
                                 <th>Gender</th>
@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
 
-                                    <td>{{$student->Registration_ID}}</td>
+                                    <td>{{$student->id}}</td>
                                     <td>{{$test->book->Name}}</td>
                                     <td>{{$student->user->First_Name.' '.$student->user->Last_Name }}</td>
                                     <td>{{$student->user->Gender}}</td>

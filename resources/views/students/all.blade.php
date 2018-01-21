@@ -42,6 +42,7 @@
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>User Name</th>
                     <th>Phone No</th>
                     <th>Class</th>
                     <th>CNIC NO</th>
@@ -54,6 +55,7 @@
                         <tr>
                             <td>{{$student['user']->First_Name}}</td>
                             <td>{{$student['user']->Last_Name}}</td>
+                            <td>{{$student['user']->username}}</td>
                             <td>{{$student['user']->Mobile}}</td>
                             <td>{{isset($student->classes->first()->name) ? $student->classes->first()->name : ""}}</td>
                             <td>{{$student['user']->CNIC}}</td>

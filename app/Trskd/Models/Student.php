@@ -2,6 +2,7 @@
 
 namespace App\Trskd\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model

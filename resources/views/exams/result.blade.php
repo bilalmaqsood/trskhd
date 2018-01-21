@@ -84,7 +84,7 @@
 
                                         </td>
                                         <td colspan="2" style="width: 40%; text-align: right">
-                                            <p style="color: black; font-style: normal">Registration No. <u style="width: 30%; font-weight: bold">{{$student->Registration_ID}}</u> </p>
+                                            <p style="color: black; font-style: normal">Registration No. <u style="width: 30%; font-weight: bold">{{$student->id}}</u> </p>
                                         </td>
                                     </tr>
                                     </tbody></table>

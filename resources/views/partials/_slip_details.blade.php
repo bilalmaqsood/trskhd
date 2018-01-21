@@ -18,7 +18,7 @@
         <div class="right">
             <p><strong>{{$student->user->First_Name}}</strong></p>
             <p><strong>{{$student->user->Last_Name}}</strong></p>
-            <p><strong>{{$student->Registration_ID}}</strong></p>
+            <p><strong>{{$student->id}}</strong></p>
             <p><strong>{{$student->user->DOB}}</strong></p>
         </div>
 

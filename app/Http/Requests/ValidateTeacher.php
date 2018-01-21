@@ -38,8 +38,9 @@ class ValidateTeacher extends FormRequest
             'First_Name'      => 'bail|required|max:255',
             'Last_Name'       => 'bail|required|max:255',
             'Guardian'        => 'bail|required|max:255',
+            'username'        => 'bail|required|unique:users|max:15',
             'CNIC'            => 'max:17',
-            'Mobile'          => 'bail|unique:users|max:17',
+            'Mobile'          => 'bail|max:17',
             'Gender'          => 'bail|required',
 //            'Image'           => 'bail|required|image'
         ];

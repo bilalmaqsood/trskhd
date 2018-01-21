@@ -97,10 +97,10 @@
                     <label class="control-label">Roll No</label> <span class="symbol required" aria-required="true"></span>
                     <input id="roll_no" placeholder="Roll No" required="required" value="{{$student->Roll_No}}" name="Roll_No" type="text" class="form-control " aria-required="true">
                 </div>
-                <div class=" form-group">
+                {{--<div class=" form-group">
                     <label class="control-label">Registration ID</label> <span class="symbol required" aria-required="true"></span>
                     <input id="reg_ID" placeholder="Registration ID" required="required" value="{{$student->Registration_ID}}" name="Registration_ID" type="text" class="form-control " aria-required="true">
-                </div>
+                </div>--}}
 
                 <div class=" form-group">
                     <label class="control-label">Religion</label> <span class="symbol required" aria-required="true"></span>

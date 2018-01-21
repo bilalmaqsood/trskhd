@@ -93,7 +93,10 @@
 
             </div>
             <div class="col-md-6">
-
+                <div class=" form-group">
+                    <label class="control-label">User Name</label> <span class="symbol required" aria-required="true"></span>
+                    <input  placeholder="user name must be unique for each user" required="required" name="username" value="{{old('username')}}" type="text" class="form-control " aria-required="true">
+                </div>
                 <div class=" form-group">
                     <label class="control-label">Religion</label> <span class="symbol required" aria-required="true"></span>
                     <input placeholder="Religion" required="required" value="{{old('Religion')}}" name="Religion" type="text" class="form-control " aria-required="true">

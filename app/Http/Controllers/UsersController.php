@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function passwordReset(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'Mobile' => 'required|max:17',
+            'username' => 'required|max:17',
         ]);
 
         if ($validator->fails()) {

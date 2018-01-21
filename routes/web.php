@@ -57,7 +57,7 @@
             Route::resource('teacher' , 'TeachersController');
 
             Route::middleware(['can:admin'])->group(function (){
-                Route::resource('attendance' , 'AttendanceController');
+                Route::resource('students/attendance' , 'AttendanceController');
                 Route::get('attendance-select/class' , 'AttendanceController@showClasses')->name('attendance_classes');
                 Route::get('all/class/students' , 'AttendanceController@showClassesStudents')->name('attendance_class_students');
                 Route::post('add/students/attendance' , 'AttendanceController@addStudentsAttendance')->name('add_attendance');

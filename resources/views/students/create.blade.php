@@ -94,13 +94,17 @@
             </div>
             <div class="col-md-6">
                 <div class=" form-group">
+                    <label class="control-label">User Name</label> <span class="symbol required" aria-required="true"></span>
+                    <input  placeholder="user name must be unique for each user" required="required" name="username" value="{{old('username')}}" type="text" class="form-control " aria-required="true">
+                </div>
+                <div class=" form-group">
                     <label class="control-label">Roll No</label> <span class="symbol required" aria-required="true"></span>
                     <input id="roll_no" placeholder="Roll No" required="required" name="Roll_No" value="{{old('Roll_No')}}" type="text" class="form-control " aria-required="true">
                 </div>
-                <div class=" form-group">
+               {{-- <div class=" form-group">
                     <label class="control-label">Registration ID</label> <span class="symbol required" aria-required="true"></span>
                     <input id="reg_ID" placeholder="Registration ID" required="required" name="Registration_ID" value="{{old('Registration_ID')}}" type="text" class="form-control " aria-required="true">
-                </div>
+                </div>--}}
 
                 <div class=" form-group">
                     <label class="control-label">Religion</label> <span class="symbol required" aria-required="true"></span>
