@@ -35,10 +35,10 @@ class SMSController extends Controller
         $user    = Auth::user();
         $status  = sendSingleSms($number,$message);
 
-        if($status){
+        /*if($status){
             Smsable::create(['user_id' => $user->id, 'text' => $message, 'receiver'=> $number]);
 
-        }
+        }*/
 
 
         return redirect()->back();
@@ -95,8 +95,9 @@ class SMSController extends Controller
     {
         $this->authorize('delete');
         $sms = Smsable::find($id);
-        $sms->delete();
+        $status = $sms->delete();
         return response()->json(['success' => 'success'], 200);
+        return $status;
 
     }
 }

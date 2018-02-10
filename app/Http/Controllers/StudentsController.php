@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudent;
+use App\Trskd\Models\SchoolInfo;
 use App\Trskd\Models\User;
 use App\Trskd\Services\ExamsService;
 use App\Trskd\Services\StudentService;
@@ -172,5 +173,15 @@ class StudentsController extends Controller
         }
 
         return view('students.fee_slip' ,compact('student'));
+    }
+
+    public function card($id)
+    {
+
+        $student = $this->service->find($id);
+
+        $school = SchoolInfo::first();
+        return view('students.card', compact('student', 'school'));
+
     }
 }

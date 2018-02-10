@@ -1,55 +1,40 @@
 @extends('layouts.app')
 
 @section('css')
+<style type="text/css">
+    th:last-child select {
+    display: none;
+}
+th:first-child select {
+    display: none;
+}
+ th:nth-of-type(6) select {
+    display: none;
+}
+ th:nth-of-type(7) select {
+    display: none;
+}
+ th:nth-of-type(8) select {
+    display: none;
+}
+</style>
 @endsection
 @section('title' , 'All-Exams')
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <div class="pull-left">
                 <h2>Exams</h2>
             </div>
             <div class="pull-right">
-                <a href="{{route('exam.create')}}" class="btn btn-primary">Create Exam</a>
+                <a href="{{route('exam.create')}}" class="btn btn-primary btn-wide margin-top-10">Create Exam</a>
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
-        <div class="tests-filters">
-            <div class="col-md-2">
-                <select name="year" class="form-control">
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select name="month" class="form-control">
-                    <option value="jan">January</option>
-                    <option value="feb">February</option>
-                    <option value="march">March</option>
-                    <option value="apr">April</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select name="class" class="form-control">
-                    <option value="class1">Class one</option>
-                    <option value="class2">Class two</option>
-                    <option value="class3">Class three</option>
-                    <option value="class4">Class four</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select name="absent" class="form-control">
-                    <option value="all">All</option>
-                    <option value="absent">Absent</option>
-                </select>
-            </div>
-        </div>
+    <div class="">
         @include('partials._exams')
     </div>
 
@@ -59,11 +44,31 @@
 
     <script>
 
-        $(function(){
-            $('#example').DataTable({
-                "sDom": 'Rfrtlip'
-            });
-        })
+         $(document).ready(function() {
+    $('#example').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+
 
     </script>
 

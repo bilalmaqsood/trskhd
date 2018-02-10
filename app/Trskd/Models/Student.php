@@ -35,15 +35,14 @@ class Student extends Model
     public function testObtainedMarks($testId, $studentId)
     {
             $testDetails = TestDetail::where('test_id', $testId)->where('student_id', $studentId)->first();
-
-            return $testDetails->marks;
+            return isset($testDetails->marks) ? $testDetails->marks : 0;
     }
 
     public function testStatus($testId, $studentId)
     {
         $testDetails = TestDetail::where('test_id', $testId)->where('student_id', $studentId)->first();
 
-        return $testDetails->status;
+        return isset($testDetails->status) ? $testDetails->status : "";
     }
 
     public function exams()
@@ -64,4 +63,8 @@ class Student extends Model
         return ($totalSms * SMSCharges);
     }
 
+    public function getNameAttribute()
+    {
+        return $this->user->First_Name ." ". $this->user->Last_Name;
+    }
 }

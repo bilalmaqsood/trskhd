@@ -5,19 +5,19 @@
 @section('title' , 'All-Classes')
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <div class="pull-left">
                 <h2>Classes</h2>
             </div>
             <div class="pull-right">
-                <a href="{{route('classes.create')}}" class="btn btn-primary">Create Class</a>
+                <a href="{{route('classes.create')}}" class="btn btn-primary btn-wide margin-top-10">Create Class</a>
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -44,6 +44,7 @@
                         <td>{{$class->seats}}</td>
                         <td>
                             <a href="{{route('classes.edit' , [$class->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
+                            <a href="{{route('class-students' , [$class->id])}}" title="Students"><i class="fa fa-eye"></i> </a>
                             <a href="javascript:void(0)" data-id="{{$class->id}}" class="delete" title="Delete"><i class="fa fa-trash"></i> </a>
                         </td>
                     </tr>

@@ -5,14 +5,13 @@
 @section('title' , 'All-Teachers')
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <h2>Add Attendance Details</h2>
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <div class="col-md-6 col-md-offset-2">
             <div class="panel panel-primary">
                 <div class="panel-heading">Attendance Sheet</div>
@@ -34,13 +33,17 @@
                                         <td>{{$teacher->user->First_Name.' '. $teacher->user->Last_Name}}</td>
                                         <td>{{ucfirst($teacher->user->Gender)}}</td>
                                         <td>
-                                            <input type="checkbox" style="display: none" checked name="teachers[{{$teacher->id}}]" value="present">
-                                            <input type="checkbox" name="teachers[{{$teacher->id}}]" value="absent">
+                                            <input type="checkbox" class="status" >
+                                            <input class="teacher" type="hidden" name="teachers[{{$teacher->id}}]" value="present">
+                                            
                                         </td>
                                     </tr>
                                 @endforeach
                               </tbody>
                         </table>
+                        <div id="teaches">
+
+                        </div>
                         {{csrf_field()}}
                         <button type="submit" class="btn btn-success">Add Attendance</button>
 
@@ -55,7 +58,19 @@
 
 @section('js')
 
+<script>
 
+    $(function(){
+        var teacherId = '{{$teacher->id}}';
+        $('.status').on('click', function() {
+
+            if (this.checked == true){
+                $(this).next('.teacher').val('absent');
+            }
+        });
+    });
+
+</script>
 
 @endsection
 

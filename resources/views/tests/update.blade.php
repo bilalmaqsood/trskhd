@@ -14,7 +14,7 @@
     <div class="container">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-primary">
-                <div class="panel-heading">{{$class->name}}</div>
+                <div class="panel-heading">{{$class->name or ""}}</div>
                 <div class="panel-body">
                     <form method="post" action="{{route('updateTestMarks' ,[$test->id])}}">
                         <table class="table table-striped table-bordered">
@@ -37,7 +37,6 @@
                             @foreach($class['students'] as $student)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-
                                     {{--<td>{{$student->Registration_ID}}</td>--}}
                                     <td>{{$test->book->Name}}</td>
                                     <td>{{$student->user->First_Name.' '.$student->user->Last_Name }}</td>

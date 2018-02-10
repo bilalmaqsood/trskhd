@@ -10,7 +10,7 @@ class Calendar extends Model
 
     public $timestamps = true;
 
-    protected $fillable = ['user_id', 'description', 'start_date', 'end_date'];
+    protected $fillable = ['user_id', 'description', 'start_date', 'end_date', 'backgroundColor', 'foregroundColor'];
 
     public function user()
     {

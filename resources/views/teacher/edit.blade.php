@@ -8,16 +8,16 @@
 
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container">
-        <div class="jumbotron">
-            <h2 class="">{{$teacher['user']->First_Name .' '. $teacher['user']->Last_Name}}</h2>
+    <div class="">
+        <div class="heading_btns_area">
+            <h2 class="">Edit Teacher</h2>
         </div>
+    <div class="clear40"></div>
         <form method="post" action="{{route('teacher.update' , [$teacher->id])}}"  enctype="multipart/form-data">
             <div class="col-md-6">
                 <div class=" form-group">
                     <label class="control-label">Select Class</label> <span class="symbol required" aria-required="true"></span>
-                    <select id=""  name="class_id" class="form-control">
+                    <select id=""  name="class_id" class="form-control selectpicker">
 
                         <option selected="selected" disabled="disabled">Select Admission Section of Student.</option>
                         @foreach($classes as $class)
@@ -50,10 +50,14 @@
                     <input placeholder="Phone No" required="required" value="{{$teacher['user']->Mobile}}" name="Mobile" id="mobile" type="text" class="form-control " aria-required="true">
                 </div>
                 <div class=" form-group">
+                    <label class="control-label">Personal No</label> <span class="symbol required" aria-required="true"></span>
+                    <input placeholder="Phone No"  value="{{old('Personal')}}" name="Personal" type="text" class="form-control " aria-required="true">
+                </div>
+                <div class=" form-group">
                     <label class="control-label">Gender</label> <span class="symbol required" aria-required="true"></span>
                     <div class="clearfix"></div>
                     <div class="radio clip-radio radio-success radio-inline">
-                        <input type="radio" id="radio1" {{($teacher['user']->Gender == "male" ? "checked" : "")}} name="Gender" value="male">
+                        <input type="radio" id="radio1" {{($teacher['user']->Gender == "male" ? "checked=checked" : "")}} name="Gender" value="male">
                         <label for="radio1">
                             Male
                         </label>
@@ -75,7 +79,7 @@
                         </label>
                     </div>
                     <div class="radio clip-radio radio-success radio-inline">
-                        <input type="radio" id="radio4" value="{{($teacher['user']->Martial_Status == "single") ? "checked" : ""}}" name="Martial_Status" value="single">
+                        <input type="radio" id="radio4" {{($teacher['user']->Martial_Status == "single") ? "checked" : ""}} name="Martial_Status" value="single">
                         <label for="radio4">
                             Single
                         </label>
@@ -99,19 +103,19 @@
                 </div>
                 <div class=" form-group">
                     <label class="control-label">Increment At</label> <span class="symbol required" aria-required="true"></span>
-                    <select  name="Increment_At" class="form-control">
-                        <option value="jan">January</option>
-                        <option value="feb">February</option>
-                        <option value="march">March</option>
-                        <option value="apr">April</option>
+                    <select value="{{old('Increment_At')}}" name="Increment_At" class="form-control selectpicker">
+                        <option disabled selected>Please select month</option>
+                        @foreach($months as $month)
+                            <option {{(strtolower(old('Increment_At')) == strtolower($month) ? "selected" : "")}} value="{{$month}}">{{$month}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class=" form-group">
-                    <div class="col-md-6">
+                    <div class="col-md-6 remove-padding-left">
                         <label class="control-label">Holidays Allow</label> <span class="symbol required" aria-required="true"></span>
                         <input placeholder="Holidays Allow" required="required" value="{{$teacher->Allowed_Holidays}}" name="Allowed_Holidays" type="text" class="form-control " aria-required="true">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 remove-padding-right">
                         <label class="control-label"> Increment %</label> <span class="symbol required" aria-required="true"></span>
                         <input placeholder=" Increment %" required="required" value="{{$teacher->Increment}}" name="Increment" type="text" class="form-control " aria-required="true">
                     </div>
@@ -126,6 +130,7 @@
                 </div>
                 <div class="imageupload ">
                     <div class="file-tab ">
+                        <img src="{{asset($teacher['user']->Image)}}"alt="Image preview" class="thumbnail" style="max-width: 250px; max-height: 250px">
                         <label class="btn btn-default btn-file">
                             <span>Browse</span>
                             <!-- The file is stored here. -->
@@ -134,7 +139,18 @@
                         <button type="button" class="btn btn-default">Remove</button>
                     </div>
                 </div>
-
+                <div class="clear10"></div>
+                <!-- <div class="imageupload ">
+                    <div class="file-tab ">
+                        <img src="{{asset($teacher['user']->Card_Image)}}" alt="Image preview" class="thumbnail" style="max-width: 250px; max-height: 250px">
+                        <label class="btn btn-default btn-file">
+                            <span>Card Image</span>
+                            <input type="file" name="Card_Image" >
+                        </label>
+                        <button type="button" class="btn btn-default" style="display: inline-block;">Remove</button>
+                        {{--<button type="button"  class="btn btn-default">Remove</button>--}}
+                    </div>
+                </div> -->
             </div>
             <div class="clearfix"></div>
             <hr>
@@ -142,10 +158,10 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-wide">Update</button>
                     </div>
                     <div class="pull-right">
-                        <button type="button" class="btn btn-default">Cancel</button>
+                        <button type="button" class="btn btn-default btn-wide">Cancel</button>
                     </div>
                 </div>
                 <div class="col-md-3"></div>
@@ -167,8 +183,6 @@
 
             form.validate();
         })
-
-
 
     </script>
 

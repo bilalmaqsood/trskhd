@@ -19,7 +19,7 @@
                     <input type="text" name="number" value="" class="form-control" placeholder="Enter Phone Number">
                 </div>
                 <div class="form-group">
-                    <textarea name="message" cols="21" rows="14" class="form-control" placeholder="Message"></textarea>
+                    <textarea name="message" cols="20" rows="13" class="form-control" placeholder="Message"></textarea>
                 </div>
                 {{csrf_field()}}
                 <div class="text-center">

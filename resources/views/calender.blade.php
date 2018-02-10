@@ -55,12 +55,35 @@
             /* For IE 5.5 - 7 */
             filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#aaaaaa');
         }
+        div#toolbar {
+            background: #004e24;
+            color: #fff;
+        }
+        .JFrontierCal-Header-Cell{
+            background-color: #d8541e !important;
+        }
+        label{
+            font-size: 12px;
+        }
+        .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix{
+            background-color: #004e24 !important;
+            background-image: none !important;
+            color: #fff;
+        }
+        .ui-dialog .ui-dialog-titlebar-close{
+            background-color: #d8541e !important;   
+        }
     </style>
 
 @endsection
 
 @section('content')
-
+<div class="heading_btns_area">
+        <div class="">
+            <h2>Calendar</h2>
+        </div>
+    </div>
+<div class="clear40"></div>
     <div id="example" style="margin: auto; width:80%;">
 
 
@@ -70,9 +93,7 @@
             &nbsp;&nbsp;&nbsp;
             Date: <input type="text" id="dateSelect" size="20"/>
             &nbsp;&nbsp;&nbsp;
-            <button id="BtnDeleteAll">Delete All</button>
-            <button id="BtnICalTest">iCal Test</button>
-            <input type="text" id="iCalSource" size="30" value="extra/fifa-world-cup-2010.ics"/>
+            <!-- <button id="BtnDeleteAll">Delete All</button> -->
         </div>
 
         <br>
@@ -469,7 +490,6 @@
                 // Please note that in Google Chrome this will not work with a local file. Chrome prevents AJAX calls
                 // from reading local files on disk.
                 jfcalplugin.loadICalSource("#mycal",$("#iCalSource").val(),"html");
-                return false;
             });
 
             /**
@@ -477,8 +497,8 @@
              */
             $("#add-event-form").dialog({
                 autoOpen: false,
-                height: 400,
-                width: 400,
+                height: 550,
+                width: 550,
                 modal: true,
                 buttons: {
                     'Add Event': function() {
@@ -543,7 +563,8 @@
                             // Dates use integers
                             var startDateObj = new Date(parseInt(startYear),parseInt(startMonth)-1,parseInt(startDay),startHour,startMin,0,0);
                             var endDateObj = new Date(parseInt(endYear),parseInt(endMonth)-1,parseInt(endDay),endHour,endMin,0,0);
-                            var data = {description: what, start_date: startDateObj.toString(), end_date: endDateObj.toString(), _token:"{{csrf_token()}}"};
+                            var data = {description: what, start_date: startDateObj.toString(), end_date: endDateObj.toString(),
+                                _token:"{{csrf_token()}}", backgroundColor: $("#colorBackground").val(), foregroundColor: $("#colorForeground").val()};
                             // add new event to the calendar
                             $.ajax({
                                 type: 'POST',
@@ -559,8 +580,8 @@
                                         endDateObj,
                                         false,
                                         {
-                                            fname: "Santa",
-                                            lname: "Claus",
+                                            fname: "",
+                                            lname: "",
                                             leadReindeer: "Rudolph",
                                             myDate: new Date(),
                                             myNum: 42
@@ -683,6 +704,22 @@
                     'Delete': function() {
                         if(confirm("Are you sure you want to delete this agenda item?")){
                             if(clickAgendaItem != null){
+
+                                var id = clickAgendaItem.data.id;
+                                $.ajax({
+                                    type  : 'POST',
+                                    url:  '{{ str_replace('-1','',route('delete-holidays',-1))  }}'+id,
+                                    data  : data,
+                                    success: function (res) {
+
+                                        console.log(clickAgendaItem.data.id);
+
+
+                                    },
+                                    error: function () {
+
+                                    }
+                                })
                                 jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
                                 //jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
                             }
@@ -746,9 +783,6 @@
                 success: function (res) {
 
                     $.each(res , function (index, obj) {
-
-                        console.log(moment(obj.start_date).format('DD'));
-
                         var startDate = moment(obj.start_date);
                         var endDate = moment(obj.start_date);
                         var startDateObj = new Date(parseInt(startDate.format('YYYY')),parseInt(startDate.format('MM'))-1,parseInt(startDate.format('DD')),0,0,0,0);
@@ -762,15 +796,12 @@
                             endDateObj,
                             false,
                             {
-                                fname: "Santa",
-                                lname: "Claus",
-                                leadReindeer: "Rudolph",
                                 myDate: new Date(),
-                                myNum: 42
+                                id: obj.id
                             },
                             {
-                                backgroundColor: $("#colorBackground").val(),
-                                foregroundColor: $("#colorForeground").val()
+                                backgroundColor: obj.backgroundColor,
+                                foregroundColor: obj.foregroundColor
                             }
                         );
                     });

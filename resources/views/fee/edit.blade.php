@@ -36,6 +36,7 @@
                                     <td>{{ucfirst($fee->status)}}</td>
                                     <td>
                                         <input type="checkbox" name="status" value="paid">
+                                       
                                     </td>
                                 </tr>
                             </tbody>

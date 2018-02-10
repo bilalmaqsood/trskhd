@@ -11,6 +11,7 @@ namespace App\Trskd\Services;
 
 use App\Trskd\Models\Smsable;
 
+
 class SMSService
 {
 
@@ -37,13 +38,22 @@ class SMSService
 
     public function absentSMS($user , $type)
     {
-        $message = "Dear {$type} ".$user->First_Name." ".$user->Last_Name. " you are absent to day";
+        $message = "Dear {$type} ".$user->First_Name." ".$user->Last_Name. " you are absent today";
         $number  = $user->Mobile;
-
-        $status  = sendSingleSms($number,$message);
+        sendSingleSms($number,$message);
         /*if($status){
             Smsable::create(['user_id' => $user->id, 'text' => $message, 'receiver'=> $number]);
         }*/
     }
-
+    public function feeSMS($user , $type)
+    {
+        $message = "Dear {$type} ".$user->First_Name." ".$user->Last_Name. " do not reveice your fees.";
+        $number  = $user->Mobile;
+        sendSingleSms($number,$message);
+        /*if($status){
+            Smsable::create(['user_id' => $user->id, 'text' => $message, 'receiver'=> $number]);
+        }*/
+    }
+    
+    
 }

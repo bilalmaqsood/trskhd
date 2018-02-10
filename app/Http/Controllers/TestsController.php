@@ -8,17 +8,19 @@ use Illuminate\Http\Request;
 use App\Trskd\Services\ExamsService;
 use App\Trskd\Services\StudentService;
 use App\Trskd\Services\UserService;
+use App\Trskd\Services\SMSService;
 use Illuminate\Support\Facades\Auth;
 
 class TestsController extends Controller
 {
     protected $service, $examService, $studentSevice, $userService;
-    public function __construct(TestsService $service,ExamsService $examsService,StudentService $studentService, UserService $userService)
+    public function __construct(TestsService $service,ExamsService $examsService,StudentService $studentService, UserService $userService,  SMSService $SMSService)
     {
         $this->examService   = $examsService;
         $this->service       = $service;
         $this->studentSevice = $studentService;
         $this->userService = $userService;
+        $this->sms = $SMSService;
         list($classes , $teachers , $tests , $books) = $this->service->initialize();
         view()->share('classes' , $classes);
         view()->share('teachers' , $teachers);
@@ -109,6 +111,7 @@ class TestsController extends Controller
                    'status' => $detail['status'],
                    'student_id' => $detail['student_id'],
                ]);
+               
             }
         }
 
@@ -123,12 +126,20 @@ class TestsController extends Controller
         if($test){
             $details = $request->details;
             foreach ($details as $key => $detail) {
-               $test->details()->update([
-                   'checked_by' => Auth::user()->id,
-                   'marks' => $detail['marks'],
-                   'status' => $detail['status'],
-                   'student_id' => $detail['student_id'],
-               ]);
+               $test->details()->updateOrCreate(
+                   [
+                       'checked_by' => Auth::user()->id,
+                       'test_id'    => $test->id,
+                       'student_id' => $detail['student_id'],
+
+                   ],
+                   [
+                       'checked_by' => Auth::user()->id,
+                       'marks'      => $detail['marks'],
+                       'status'     => $detail['status'],
+                       'student_id' => $detail['student_id'],
+                    ]
+               );
             }
         }
 

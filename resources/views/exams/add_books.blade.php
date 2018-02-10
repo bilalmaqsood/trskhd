@@ -5,21 +5,20 @@
 
 @section('content')
 
-    <div class="clear40"></div>
 
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <h2>Add {{$examData['Name']}} Details</h2>
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <div class="col-md-12 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">{{$class->name . " Books"}}</div>
-                <div class="panel-body">
+                <div class="panel-body table-responsive">
                     <form method="POST" action="{{route('exam.store')}}">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered text-nowrap">
                             <thead>
                             <tr>
                                 <th>No</th>

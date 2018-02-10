@@ -5,14 +5,13 @@
 @section('title' , 'Edi-Attendance')
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <h2>Add Attendance Details</h2>
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <div class="col-md-6 col-md-offset-2">
             <div class="panel panel-primary">
                 <div class="panel-heading">Attendance Sheet</div>
@@ -36,7 +35,13 @@
                                 <td>{{$attendance['student']->studentClass->name}}</td>
                                 <td>
                                     <input type="checkbox" style="display: none" checked name="status" value="present">
-                                    <input type="checkbox" name="status" value="absent">
+                                    <div class="checkbox clip-check check-primary">
+                                                        <input id="status" name="status" value="absent" type="checkbox">
+                                                        <label for="status">
+                                                           
+                                                        </label>
+                                                    </div>
+                                        </td>
                                 </td>
                             </tr>
                               </tbody>

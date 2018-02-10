@@ -8,11 +8,11 @@
 
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container">
-        <div class="jumbotron">
-            <h2 class="">{{$test->Name}}</h2>
+    <div class="">
+        <div class="heading_btns_area">
+            <h2 class="">Edit {{$test->Name}}</h2>
         </div>
+        <div class="clear40"></div>
         <div class="create_test_area">
             <div class="col-md-6 col-md-offset-2">
                 <div class="panel panel-primary">
@@ -25,7 +25,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Book</label>
-                                <select class="form-control" name="book_id">
+                                <select class="form-control selectpicker" name="book_id">
                                     <option disabled selected>Select a book</option>
                                     @foreach($books as $book)
                                         <option {{($book->id == $test->book_id) ? "selected" : ""}} value="{{$book->id}}">{{$book->name}}</option>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Select Class</label>
-                                <select name="class_id" class="form-control">
+                                <select name="class_id" class="form-control selectpicker">
 
                                     <option selected="selected" disabled="disabled">Select Class</option>
                                     @foreach($classes as $class)
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Select Teacher</label>
-                                <select name="teacher_id" class="form-control">
+                                <select name="teacher_id" class="form-control selectpicker">
                                     <option selected="selected" disabled="disabled">Select Teacher</option>
                                     @foreach($teachers as $teacher)
                                         <option {{($test->teacher_id == $teacher->id) ? "selected" : ""  }} value="{{$teacher->id}}">{{$teacher['user']->First_Name . ' '. $teacher['user']->Last_Name}}</option>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Select Year</label>
-                                <select name="Year" class="form-control">
+                                <select name="Year" class="form-control selectpicker">
                                     <option value="2017">2017</option>
                                     <option value="2018">2018</option>
                                     <option value="2019">2019</option>
@@ -82,8 +82,8 @@
                                 <input id="datepicker1"  required="required" value="{{$test->End_Time}}" name="End_Time" type="time" class="form-control " aria-required="true">
                             </div>
                             {{csrf_field()}}
-                            <button type="submit" value="" class="btn btn-success">Update Exam</button>
-                            <a href="{{route('test.index')}}" class="btn btn-primary test_toggle">Show All Exams</a>
+                            <button type="submit" value="" class="btn btn-success btn-wide">Update Test</button>
+                            <a href="{{route('test.index')}}" class="btn btn-primary btn-wide test_toggle">Show All Tests</a>
                             <hr>
                             <input type="hidden" name="_method" value="PATCH">
                         </form>

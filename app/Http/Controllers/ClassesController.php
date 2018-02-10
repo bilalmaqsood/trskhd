@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Trskd\Models\Book;
+use App\Trskd\Models\SchoolClass;
+use App\Trskd\Models\Student;
 use App\Trskd\Services\ClassService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -103,6 +105,27 @@ class ClassesController extends Controller
 
         return $class;
 
+    }
+
+    public function classStudents($id)
+    {
+        $students = Student::with('studentClass')->where('class_id', $id)->get();
+
+        return view('classes.update_class', compact('students'));
+    }
+
+    public function updateClassStudents(Request $request)
+    {
+        $class_id = $request->class_id;
+        foreach ($request->students as $key => $s){
+            if($s){
+                $student = Student::find($key);
+                $student->class_id = $class_id;
+                $student->save();
+                $student->classes()->attach($class_id);
+            }
+        }
+        return redirect()->route('classes.index');
     }
 
 }

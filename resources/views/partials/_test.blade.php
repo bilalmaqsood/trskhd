@@ -1,9 +1,8 @@
-<div class="test_information">
-    <hr>
+<div class="test_information table-responsive">
     <table class="table table-bordered table-hover table-striped">
         <thead>
         <tr>
-            {{--<th>Name</th>--}}
+            <th>Name</th>
             <th>Class</th>
             <th>Book</th>
             <th>Total Marks</th>
@@ -14,7 +13,7 @@
         <tbody>
         @foreach($test['details'] as $detail)
             <tr>
-                {{--<td>{{$detail['student']->user->First_Name.' '.$detail['student']->user->Last_Name }}</td>--}}
+               <td>{{$detail['student']->user->First_Name.' '.$detail['student']->user->Last_Name }}</td>
                 <td>{{$test['examclass']->name}}</td>
                 <td>{{$test['book']->name}}</td>
                 <td>{{$test->Total_Marks}}</td>

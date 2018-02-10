@@ -1,20 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Trskd\Models\Student;
+use App\Trskd\Models\Fee;
 use App\Trskd\Services\ClassService;
 use App\Trskd\Services\FeeService;
 use App\Trskd\Services\StudentService;
+use App\Trskd\Services\SMSService;
 use Illuminate\Http\Request;
 
 class FeesController extends Controller
 {
     protected $service, $classService, $student;
-    public function __construct(FeeService $feeService,ClassService $classService, StudentService $student)
+    public function __construct(FeeService $feeService,ClassService $classService, StudentService $student, SMSService $SMSService)
     {
         $this->service      = $feeService;
         $this->classService = $classService;
         $this->student      = $student;
+        $this->sms = $SMSService;
 
         list($classes ) = $this->service->initialize();
         view()->share('classes' , $classes);
@@ -40,13 +43,21 @@ class FeesController extends Controller
     }
     public function addStudentsFee(Request $request)
     {
+
         $unpaidStudents = $request->students;
         $class_id       = $request->class_id;
 
         foreach ($unpaidStudents as $student => $status)
         {
             $data = ['class_id' => $class_id , 'student_id' => $student ,'status' => $status];
+            
+             Fee::create($data);
+            if($status == 'pending'){
 
+                $stdfeesms = Student::find($data['student_id']);
+                $this->sms->feeSMS($stdfeesms->user , 'Student');
+
+            }
             $this->service->addFeeStatus($data);
         }
         return redirect()->route('home');

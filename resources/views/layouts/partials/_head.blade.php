@@ -4,27 +4,30 @@
 
 <meta name="description" content="">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="shortcut icon" type="image/ico" href="{{asset('')}}/assets/images/favicon.ico">
-<link rel="icon" type="image/png" href="{{asset('')}}/assets/images/favicon.png">
+<link rel="shortcut icon" type="image/ico" href="{{asset('/assets/images/favicon.ico')}}">
+<link rel="icon" type="image/png" href="{{asset('/assets/images/favicon.png')}}">
 
 <!-- Styles Start -->
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/bootstrap.min.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/bootstrap.css')}}">
 {{--<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/bootstrap-theme.min.css">--}}
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.css" />
 
 {{--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">--}}
-<link href="{{asset('')}}/assets/styles/font-awesome.min.css" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/flexslider.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/animate.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/bootsnav.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/sweet-alert.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/toastr.min.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/bootstrap-imageupload.min.css">
+<link href="{{asset('/assets/styles/font-awesome.min.css')}}" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/flexslider.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/animate.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/bootsnav.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/sweet-alert.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/toastr.min.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/bootstrap-imageupload.min.css')}}">
 {{--<link href="{{asset('')}}dist/css/bootstrap-imageupload.css" rel="stylesheet">--}}
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/style.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/custom.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/responsive.css">
-<link type="text/css" rel="stylesheet" href="{{asset('')}}/assets/styles/select2.min.css">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/style.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/style5.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('assets/styles/custom.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/responsive.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
 
 <!-- Styles End -->

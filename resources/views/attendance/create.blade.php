@@ -19,14 +19,14 @@
                 <div class="panel-body">
                     <form method="post" action="add_fee_details.html">
                         <div class="form-group">
-                            <select class="form-control">
+                            <select class="form-control selectpicker">
                                 <option selected disabled>Select Class</option>
                                 @foreach($classes as $class)
                                     <option value="{{$class->id}}">{{$class->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-success">Show Student</button>
+                        <button type="submit" class="btn btn-success btn-wide">Show Student</button>
 
                     </form>
                 </div>

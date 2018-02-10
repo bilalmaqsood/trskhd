@@ -5,18 +5,18 @@
 
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container">
-        <div class="jumbotron">
+    <div class="">
+        <div class="heading_btns_area">
             <h2 class="">{{$exam->Name}}</h2>
         </div>
+        <div class="clear40"></div>
         <form method="post" action="{{route('exam.update' , [$exam->id])}}" >
 
             <div class="create_test_area">
                 <div class="container">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="panel panel-primary">
-                            <div class="panel-heading">{{""}}</div>
+                            <div class="panel-heading">{{$exam->Name}}</div>
                             <div class="panel-body">
                                 <form method="POST" >
                                     <table class="table table-striped table-bordered">

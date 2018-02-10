@@ -29,7 +29,12 @@ class UserService
         $data['password'] =  Hash::make('123456');
         if(request()->hasFile('Image')){
 
-            $data['Image'] = $this->uploadImage();
+            $data['Image'] = $this->uploadImage('Image');
+        }
+
+        if(request()->hasFile('Card_Image')){
+
+            $data['Card_Image'] = $this->uploadImage('Card_Image');
         }
 
         $user = $this->model->create($data);
@@ -61,18 +66,23 @@ class UserService
         $user = $this->find($id);
         $data = request()->all();
         if(request()->hasFile('Image')){
-            $data['Image'] = $this->uploadImage();
+            $data['Image'] = $this->uploadImage('Image');
+        }
+
+        if(request()->hasFile('Card_Image')){
+
+            $data['Card_Image'] = $this->uploadImage('Card_Image');
         }
 
         $user->update($data);
         return $user;
     }
-    public function uploadImage()
+    public function uploadImage($type)
     {
         $name = "";
-        $name = time() . '.' . request()->file('Image')->getClientOriginalExtension();
-        request()->file('Image')->move(public_path() . '/users/profile/', $name);
-        $name = "users/profile/" . $name;
+        $name = time() . '.' . request()->file($type)->getClientOriginalExtension();
+        request()->file($type)->move(public_path() . "/users/{$type}/", $name);
+        $name = "users/{$type}/" . $name;
         return $name;
     }
 

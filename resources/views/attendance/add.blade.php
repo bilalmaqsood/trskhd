@@ -5,14 +5,13 @@
 @section('title' , 'All-Fees')
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <h2>Add Attendance Details</h2>
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <div class="col-md-6 col-md-offset-2">
             <div class="panel panel-primary">
                 <div class="panel-heading">Attendance Sheet</div>
@@ -37,7 +36,12 @@
                                         <td>{{$class->name}}</td>
                                         <td>
                                             <input type="checkbox" style="display: none" checked name="students[{{$student->id}}]" value="present">
-                                            <input type="checkbox" name="students[{{$student->id}}]" value="absent">
+                                            <div class="checkbox clip-check check-primary">
+                                                        <input id="students[{{$student->id}}]" name="students[{{$student->id}}]" value="absent" type="checkbox">
+                                                        <label for="students[{{$student->id}}]">
+                                                           
+                                                        </label>
+                                                    </div>
                                         </td>
                                     </tr>
                                 @endforeach

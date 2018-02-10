@@ -30,7 +30,8 @@ class Teacher extends Model
 
     public function teacherClass()
     {
-        return $this->belongsTo(SchoolClass::class, 'class_id', ' id');
+        return $this->belongsTo(SchoolClass::class, 'class_id' , 'id');
+
     }
 
     public function getLeavesAttribute()
@@ -65,5 +66,10 @@ class Teacher extends Model
     public function getNetSalaryAttribute()
     {
         return $this->Salary - $this->getLeavesFineAttribute() - $this->getSmsChargesAttribute();
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->user->First_Name ." ". $this->user->Last_Name;
     }
 }

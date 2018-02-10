@@ -5,14 +5,13 @@
 
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <h2>Create Exam</h2>
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <div class="create_test_area">
             <div class="col-md-6 col-md-offset-2">
                 <div class="panel panel-primary">
@@ -34,7 +33,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Select Class</label>
-                                <select  id="class" name="class_id" class="form-control">
+                                <select  id="class" name="class_id" class="form-control selectpicker">
 
                                     <option selected="selected" disabled="disabled">Select Class</option>
                                     @foreach($classes as $class)
@@ -45,7 +44,7 @@
                             </div>
                             {{--<div class="form-group">
                                 <label>Book</label>
-                                <select id="books" class="js-example-basic-multiple form-control" name="book_id[]" multiple="multiple">
+                                <select id="books" class="js-example-basic-multiple form-control selectpicker" name="book_id[]" multiple="multiple">
                                     <option disabled >Select a book</option>
                                     --}}{{--@foreach($books as $book)
                                         --}}{{----}}{{--<option value="{{$book->id}}">{{$book->name}}</option>--}}{{----}}{{--
@@ -54,7 +53,7 @@
                             </div>--}}
                             <div class="form-group">
                                 <label>Exam Type</label>
-                                <select name="Type" class="form-control">
+                                <select name="Type" class="form-control selectpicker">
                                     <option disabled selected>Select Exam Type</option>
                                     <option value="Mid Term">Mid Term</option>
                                     <option value="Final Term">Final Term</option>
@@ -62,7 +61,7 @@
                             </div>
                             {{--<div class="form-group">
                                 <label>Select Teacher</label>
-                                <select name="teacher_id" class="form-control">
+                                <select name="teacher_id" class="form-control selectpicker">
                                     <option selected="selected" disabled="disabled">Select Teacher</option>
                                     @foreach($teachers as $teacher)
                                         <option value="{{$teacher->id}}">{{$teacher['user']->First_Name . ' '. $teacher['user']->Last_Name}}</option>
@@ -71,7 +70,7 @@
                             </div>--}}
                             <div class="form-group">
                                 <label>Select Year</label>
-                                <select name="Year" class="form-control">
+                                <select name="Year" class="form-control selectpicker">
                                     <option value="2017">2017</option>
                                     <option value="2018">2018</option>
                                     <option value="2019">2019</option>

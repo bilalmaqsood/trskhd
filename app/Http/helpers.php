@@ -26,7 +26,7 @@ if (!function_exists('sendSms')) {
 
     function sendSms($number , $message = null)
     {
-        $username = 'babartrs';
+        $username = 'Babartrs';
         $password = '12345678';
         $to = $number;
         $from = 'Brand';
@@ -61,7 +61,8 @@ if (!function_exists('sendSingleSms')) {
 
     function sendSingleSms($number , $message = null)
     {
-        $username = 'babartrs';
+
+        $username = 'Babartrs';
         $password = '12345678';
         $to = $number;
         $from = 'Brand';

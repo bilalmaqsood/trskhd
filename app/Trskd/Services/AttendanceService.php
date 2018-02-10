@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Rehman Akbar
+ * User: Kashi Sab
  * Date: 12/24/2017
  * Time: 1:05 PM
  */
@@ -37,12 +37,17 @@ class AttendanceService
     public function addAttendanceStatus($data)
     {
         $attendance = $this->model->create($data);
-        $student = $this->studentService->find($data['student_id']);
-        $this->sms->absentSMS($student->user, 'Student');
+        if($data['status'] == 'absent'){
+
+            $student = $this->studentService->find($data['student_id']);
+            $this->sms->absentSMS($student->user, 'Student');
+        }
+
     }
 
     public function addTeacherAttendanceStatus($data)
     {
+
         $attendance = TeacherAttendance::create($data);
 
         $teacher = Teacher::find($data['teacher_id']);

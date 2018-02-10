@@ -4,15 +4,15 @@
 
 @endsection
 
-@section('title' , 'Edit-Student')
+@section('title' , 'Edit Student')
 
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container">
-        <div class="jumbotron">
-            <h2 class="">Student</h2>
+    <div class="">
+        <div class="heading_btns_area">
+            <h2 class="">Edit Student</h2>
         </div>
+    <div class="clear40"></div>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <div class=" form-group">
                     <label class="control-label">Select Class</label> <span class="symbol required" aria-required="true"></span>
-                    <select id=""  name="class_id" class="form-control">
+                    <select id=""  name="class_id" class="form-control selectpicker">
 
                         <option selected="selected" disabled="disabled">Select Admission Section of Student.</option>
                         @foreach($classes as $class)
@@ -125,7 +125,18 @@
                         <button type="button" class="btn btn-default">Remove</button>
                     </div>
                 </div>
-
+                <div class="clear10"></div>
+               <!--  <div class="imageupload ">
+                    <div class="file-tab ">
+                        <img src="{{asset($student['user']->Card_Image)}}" alt="Image preview" class="thumbnail" style="max-width: 250px; max-height: 250px">
+                        <label class="btn btn-default btn-file">
+                            <span>Card Image</span>
+                            <input type="file" name="Card_Image" value="">
+                        </label>
+                        <button type="button" class="btn btn-default" style="display: inline-block;">Remove</button>
+                        {{--<button type="button"  class="btn btn-default">Remove</button>--}}
+                    </div>
+                </div> -->
             </div>
             <div class="clearfix"></div>
             <hr>
@@ -133,10 +144,10 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary btn-wide">Update</button>
                     </div>
                     <div class="pull-right">
-                        <a type="button" href="{{route('student.index')}}" class="btn btn-default">Cancel</a>
+                        <a type="button" href="{{route('student.index')}}" class="btn btn-default btn-wide">Cancel</a>
                     </div>
                 </div>
                 <div class="col-md-3"></div>

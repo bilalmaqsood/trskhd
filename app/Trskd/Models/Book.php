@@ -33,6 +33,8 @@ class Book extends Model
 
     public function number($exam, $classId, $studentId)
     {
+        if($exam->isEmpty() || empty($classId))
+            return null;
 
         $examId = $exam->first()->id;
 
@@ -41,5 +43,36 @@ class Book extends Model
 
 //        return $result;
         return isset($result) ? $result->obtained_marks : 0;
+    }
+
+    public function totalNumber($exam, $classId, $studentId)
+    {
+        if($exam->isEmpty() || empty($classId))
+            return null;
+
+        $exam = $exam->first();
+        if($exam){
+
+            $exam->load('details');
+        }
+
+        $details = $exam['details']->where('book_id', $this->id)->first();
+        return isset($details) ? $details->Total_Marks : 0;
+    }
+
+    public function passingNumber($exam, $classId, $studentId)
+    {
+        if($exam->isEmpty() || empty($classId))
+            return null;
+        
+        $exam = $exam->first();
+        if($exam){
+
+            $exam->load('details');
+        }
+
+        $details = $exam['details']->where('book_id', $this->id)->first();
+
+        return isset($details) ? $details->Passing_Marks : 0;
     }
 }

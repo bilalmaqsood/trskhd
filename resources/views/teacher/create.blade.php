@@ -4,15 +4,15 @@
 
 @endsection
 
-@section('title' , 'Teachers')
+@section('title' , 'Create Staff')
 
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container">
-        <div class="jumbotron">
-            <h2 class="">Teachers</h2>
+    <div class="">
+        <div class="heading_btns_area">
+            <h2 class="">Create Staff</h2>
         </div>
+        <div class="clear40"></div> 
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <div class=" form-group">
                     <label class="control-label">Select Class</label> <span class="symbol required" aria-required="true"></span>
-                    <select id="" name="class_id" class="form-control">
+                    <select id="" name="class_id" class="form-control selectpicker">
 
                         <option selected="selected" disabled="disabled">Select Admission Section of Student.</option>
                         @foreach($classes as $class)
@@ -57,6 +57,10 @@
                 <div class=" form-group">
                     <label class="control-label">Mobile No</label> <span class="symbol required" aria-required="true"></span>
                     <input placeholder="Phone No" required="required" value="{{old('Mobile')}}" name="Mobile" id="mobile" type="text" class="form-control " aria-required="true">
+                </div>
+                <div class=" form-group">
+                    <label class="control-label">Personal No</label> <span class="symbol required" aria-required="true"></span>
+                    <input placeholder="Phone No"  value="{{old('Personal')}}" name="Personal" type="text" class="form-control " aria-required="true">
                 </div>
                 <div class=" form-group">
                     <label class="control-label">Gender</label> <span class="symbol required" aria-required="true"></span>
@@ -111,7 +115,7 @@
                 </div>
                 <div class=" form-group">
                     <label class="control-label">Increment At</label> <span class="symbol required" aria-required="true"></span>
-                    <select value="{{old('Increment_At')}}" name="Increment_At" class="form-control">
+                    <select value="{{old('Increment_At')}}" name="Increment_At" class="form-control selectpicker">
                         <option disabled selected>Please select month</option>
                         @foreach($months as $month)
                             <option {{(strtolower(old('Increment_At')) == strtolower($month) ? "selected" : "")}} value="{{$month}}">{{$month}}</option>
@@ -119,11 +123,11 @@
                     </select>
                 </div>
                 <div class=" form-group">
-                    <div class="col-md-6">
+                    <div class="col-md-6 remove-padding-left">
                         <label class="control-label">Holidays Allow</label> <span class="symbol required" aria-required="true"></span>
                         <input placeholder="Holidays Allow" required="required" value="{{old('Allowed_Holidays')}}" name="Allowed_Holidays" type="text" class="form-control " aria-required="true">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 remove-padding-right">
                         <label class="control-label"> Increment %</label> <span class="symbol required" aria-required="true"></span>
                         <input placeholder=" Increment %" required="required" value="{{old('Increment')}}" name="Increment" type="text" class="form-control " aria-required="true">
                     </div>
@@ -146,7 +150,18 @@
                         <button type="button" class="btn btn-default">Remove</button>
                     </div>
                 </div>
-
+                <div class="clear10"></div>
+                <!-- <div class="imageupload ">
+                    <div class="file-tab ">
+                        <img src="" alt="Image preview" class="thumbnail" style="max-width: 250px; max-height: 250px">
+                        <label class="btn btn-default btn-file">
+                            <span>Card Image</span>
+                            <input type="file" name="Card_Image" value="{{old('Card_Image')}}">
+                        </label>
+                        <button type="button" class="btn btn-default" style="display: inline-block;">Remove</button>
+                        {{--<button type="button"  class="btn btn-default">Remove</button>--}}
+                    </div>
+                </div> -->
             </div>
             <div class="clearfix"></div>
             <hr>
@@ -154,10 +169,10 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-wide">Create</button>
                     </div>
                     <div class="pull-right">
-                        <button type="button" class="btn btn-default">Cancel</button>
+                        <button type="button" class="btn btn-default btn-wide">Cancel</button>
                     </div>
                 </div>
                 <div class="col-md-3"></div>
@@ -179,7 +194,8 @@
             form.validate();
         })
 
-
+        var $imageupload = $('.imageupload');
+        $imageupload.imageupload();
 
     </script>
 

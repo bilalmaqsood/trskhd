@@ -19,6 +19,12 @@
     /************************ End Teachers Routes ***********************************************/
 
 
+    /************************ Report Routes ***********************************************/
+     Route::get('reports/{type}/', 'ReportsController@index')->name('reports.index');
+     Route::post('reports/{type}/', 'ReportsController@generateReport')->name('reports.generate');
+    /************************ End Report Routes ***********************************************/
+
+
     /************************ Students Routes ***********************************************/
 
         Route::post('student/status/{id}' , 'StudentsController@status')->name('student.status');
@@ -77,6 +83,8 @@
 
                 /************************ Classes Routes ***********************************************/
                 Route::resource('classes' , 'ClassesController');
+                Route::get('class/students/{class_id}', 'ClassesController@classStudents')->name('class-students');
+                Route::post('update/class', 'ClassesController@updateClassStudents')->name('update-class');
                 Route::post('get/books/{id}' , 'ClassesController@getBooks')->name('get.books');
                 Route::post('delete/books/{id}' , 'ClassesController@deleteBook')->name('delete.book');
 
@@ -115,6 +123,15 @@
                 Route::post('all/student/sms', 'SMSController@studentAll')->name('students.all');
             });
 
+            Route::post('calender/add-holiday', 'HomeController@calenderAddHoliday')->name('calenderAddHoliday');
+
+            Route::get('school/information', 'HomeController@schoolInfo')->name('school_info');
+            Route::post('add/school/information', 'HomeController@saveSchoolInfo')->name('add_school_info');
+
+            Route::get('inventory', 'HomeController@invnetory')->name('inventory');
+
+            Route::post('teacher/delete-attendance/{id}', 'AttendanceController@deleteTeacherAttendance')->name('teacher-delete-attendance');
+
         });
     /************************ End Admin Routes ***********************************************/
 
@@ -124,7 +141,9 @@
     Route::post('password/change', 'UsersController@passwordReset')->name('password.mobile');
 
     Route::get('calender', 'HomeController@calender')->name('calender');
-    Route::post('calender/add-holiday', 'HomeController@calenderAddHoliday')->name('calenderAddHoliday');
     Route::post('calender/holidays', 'HomeController@calenderGetHolidays')->name('GetHolidays');
+    Route::post('calender/delete-holidays/{id}', 'HomeController@calenderDeleteHolidays')->name('delete-holidays');
+    Route::get('teacher/card/{teacher_id}','TeachersController@card')->name('teacher-card');
+    Route::get('student/card/{student_id}','StudentsController@card')->name('student-card');
 
     Auth::routes();

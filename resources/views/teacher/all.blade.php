@@ -1,43 +1,33 @@
 @extends('layouts.app')
 
+@section('title' , 'All Staff')
 @section('css')
+<style type="text/css">
+    th:last-child select {
+    display: none;
+}
+</style>
 @endsection
 
 @section('title' , 'Teachers')
 
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container">
+    <div class="">
 
-        <div class="jumbotron">
-            <h2 class="">All Teachers</h2>
-            <div class="pull-right">
-                <a href="{{route('teacher.create')}}" class="btn btn-primary">Add New</a>
+        <div class="heading_btns_area">
+            <div class="pull-left">
+                <h2 class="">All Teachers</h2>
             </div>
+            <div class="pull-right">
+                <a href="{{route('teacher.create')}}" class="btn btn-primary btn-wide margin-top-10">Add New</a>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
-        <div class="clear20"></div>
+        <div class="clear40"></div>
         <div class="view_std_area">
-            <div class="std-filters">
-                <div class="col-md-2">
-                    <select name="year" class="form-control">
-                        <option value="2017">2017</option>
-                        <option value="2018">2018</option>
-                        <option value="2019">2019</option>
-                        <option value="2020">2020</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="month" class="form-control">
-                        <option value="jan">January</option>
-                        <option value="feb">February</option>
-                        <option value="march">March</option>
-                        <option value="apr">April</option>
-                    </select>
-                </div>
-            </div>
-            <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <table id="example" class="table table-striped table-bordered display" width="100%" cellspacing="0">
                 <thead>
                 <tr>
                     <th>First Name</th>
@@ -45,9 +35,23 @@
                     <th>Phone No</th>
                     <th>Designation</th>
                     <th>CNIC NO</th>
+                    <th>Month</th>
+                    <th>Year</th>
                     <th>Action</th>
                 </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone No</th>
+                    <th>Designation</th>
+                    <th>CNIC NO</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                </tr>
+                </tfoot>
                 <tbody>
                     @if(isset($teachers))
                         @foreach($teachers as $teacher)
@@ -56,6 +60,8 @@
                                 <td>{{$teacher['user']->Last_Name}}</td>
                                 <td>{{$teacher['user']->Mobile}}</td>
                                 <td>{{$teacher->Designation}}</td>
+                                <td>{{parse($teacher->Joining_Date)->format('M')}}</td>
+                                <td>{{parse($teacher->Joining_Date)->format('Y')}}</td>
                                 <td>{{$teacher['user']->CNIC}}</td>
                                 <td>
                                     <a href="{{route('teacher.show' , [$teacher->id])}}" title="View"><i class="fa fa-eye"></i> </a>
@@ -63,8 +69,12 @@
                                     <a class="status" data-id="{{$teacher['user']->id}}" href="javascript:void(0)" title="{{($teacher['user']->Activated) ? 'Un Lock' :  'Locked'}}">
                                         <i class="fa {{($teacher['user']->Activated) ? 'fa-unlock' :  'fa-lock'}} "></i>
                                     </a>
+
                                     <a href="{{route('view_salary_slip' , [$teacher->id])}}" title="Salary Slip">
                                         <i class="fa fa-link"></i>
+                                    </a>
+                                    <a href="{{route('teacher-card',[$teacher->id])}}" title="Card">
+                                        <i class="fa fa-credit-card" aria-hidden="true"></i>
                                     </a>
                                     <a class="delete" data-id="{{$teacher['user']->id}}" href="javascript:void(0)" title="Delete">
                                         <i class="fa fa-trash"></i>
@@ -85,12 +95,30 @@
 
     <script>
 
-        $(function(){
-            $('#example').DataTable({
-                "sDom": 'Rfrtlip'
-            });
-        })
-
+        $(document).ready(function() {
+    $('#example').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
     </script>
 
 @endsection

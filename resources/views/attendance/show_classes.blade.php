@@ -19,14 +19,14 @@
                 <div class="panel-body">
                     <form method="get" action="{{route('attendance_class_students')}}">
                         <div class="form-group">
-                            <select name="class_id"  class="form-control">
+                            <select name="class_id"  class="form-control selectpicker">
                                 <option selected disabled="disabled">Please select a class</option>
                                 @foreach($classes as $class)
                                     <option value="{{$class->id}}">{{$class->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-success">Show Student</button>
+                        <button type="submit" class="btn btn-success btn-wide">Show Student</button>
                     </form>
                 </div>
             </div>

@@ -5,15 +5,14 @@
 
 @section('content')
 
-    <div class="clear40"></div>
 
     <div class="heading_btns_area">
-        <div class="container">
+        <div class="">
             <h2>{{$exam->Name}}</h2>
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container">
+    <div class="">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-primary">
                 <div class="panel-heading">{{$book->name . ", Total Marks = ". $details->Total_Marks .",  Passing Marks = " .$details->Passing_Marks }} </div>

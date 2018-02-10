@@ -6,6 +6,7 @@ use App\Trskd\Models\Teacher;
 use App\Trskd\Models\TeacherAttendance;
 use App\Trskd\Services\AttendanceService;
 use App\Trskd\Services\ClassService;
+use App\Trskd\Services\SMSService;
 use App\Trskd\Services\StudentService;
 use App\Trskd\Services\UserService;
 use Illuminate\Http\Request;
@@ -14,11 +15,12 @@ use Illuminate\Support\Facades\Auth;
 class AttendanceController extends Controller
 {
     protected $service, $classService, $user;
-    public function __construct(AttendanceService $attendanceService,ClassService $classService, UserService $userService)
+    public function __construct(AttendanceService $attendanceService,ClassService $classService, UserService $userService,SMSService $SMSService)
     {
         $this->service      = $attendanceService;
         $this->classService = $classService;
         $this->user         = $userService;
+        $this->sms = $SMSService;
 
         list($classes ) = $this->service->initialize();
         view()->share('classes' , $classes);
@@ -122,10 +124,24 @@ class AttendanceController extends Controller
         foreach ($teachers as $teacher => $status)
         {
             $data = ['status' => $status, 'teacher_id' => $teacher, 'user_id' => Auth::user()->id];
+            TeacherAttendance::create($data);
+            if($status == 'absent'){
 
-            $this->service->addTeacherAttendanceStatus($data);
+                $teacher = Teacher::find($data['teacher_id']);
+                $this->sms->absentSMS($teacher->user , 'Teacher');
 
-            return redirect()->route('teachersAttendance');
+            }
         }
+
+        return redirect()->route('teachersAttendance');
+
+    }
+
+    public function deleteTeacherAttendance($id)
+    {
+        $attendance = TeacherAttendance::find($id);
+        $attendance->delete();
+        return response()->json(['success' => 'success'], 200);
+
     }
 }

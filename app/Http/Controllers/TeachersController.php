@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateTeacher;
 use App\Trskd\Models\SchoolClass;
+use App\Trskd\Models\SchoolInfo;
 use App\Trskd\Models\TeacherAttendance;
 use App\Trskd\Services\TeacherService;
 use App\Trskd\Services\UserService;
@@ -117,4 +118,17 @@ class TeachersController extends Controller
 
         return $pdf->stream();
     }
+
+    public function card($id)
+    {
+
+        $teacher = $this->service->find($id);
+        if($teacher){
+            $teacher->load('teacherClass');
+        }
+        $school = SchoolInfo::first();
+        return view('teacher.card', compact('teacher', 'school'));
+
+    }
+
 }

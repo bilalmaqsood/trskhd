@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Trskd\Models\Calendar;
 use App\Trskd\Models\Logo;
+use App\Trskd\Models\SchoolInfo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -117,5 +118,46 @@ class HomeController extends Controller
         $holidays    = Calendar::whereBetween('created_at', array($monthStart, $monthEnd))->get()->toArray();
 
         return $holidays;
+    }
+    public function calenderDeleteHolidays($id)
+    {
+        $event = Calendar::find($id);
+
+        $event->delete();
+    }
+
+    public function schoolInfo()
+    {
+        $school = SchoolInfo::first();
+        if($school){
+
+            return view('admin.update-school-info', compact('school'));
+
+        }
+
+        return view('admin.school-info');
+
+    }
+
+    public function saveSchoolInfo(Request $request)
+    {
+        $data = $request->all();
+
+        if(request()->hasFile('Image')){
+
+            $name = "";
+            $name = time() . '.' . request()->file('Image')->getClientOriginalExtension();
+            request()->file('Image')->move(public_path() . '/signature/', $name);
+            $name = "signature/" . $name;
+            $data['image'] = $name;
+        }
+
+        $school = SchoolInfo::create($data);
+        return redirect()->route('home');
+    }
+
+    public function invnetory()
+    {
+        return view('admin.invnetory');
     }
 }
