@@ -116,3 +116,11 @@ if (!function_exists('months')) {
     }
 }
 
+if (!function_exists('totalFee')) {
+
+    function totalFee($fees,$amount)
+    {
+        $count = $fees->count();
+        return $count*$amount;
+    }
+}

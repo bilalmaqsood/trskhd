@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudent;
+use App\Trskd\Models\Fee;
 use App\Trskd\Models\SchoolInfo;
 use App\Trskd\Models\User;
 use App\Trskd\Services\ExamsService;
@@ -168,11 +169,10 @@ class StudentsController extends Controller
     {
         $student = $this->service->find($id);
         if($student){
-
             $student->load('user');
+            $fees = $student->fees()->where("status",Fee::PENDING)->get();
         }
-
-        return view('students.fee_slip' ,compact('student'));
+        return view('students.fee_slip' ,compact('student','fees'));
     }
 
     public function card($id)

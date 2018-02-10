@@ -66,7 +66,6 @@
                             <td>{{$student['user']->CNIC}}</td>
                             <td>
                                 <a href="{{route('student.show' , [$student->id])}}" title="View"><i class="fa fa-eye"></i> </a>
-                                <a href="{{route('studentFeeSlip' , ['id'=>$student->id])}}" title="View"><i class="fa fa-file" aria-hidden="true"></i> </a>
                                 <a href="{{route('student.result' , ['id' => $student->id])}}" title="View"><i class="fa fa-ambulance"></i> </a>
                                 <a href="{{route('student.edit' , [$student->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
                                 <a class="status" data-id="{{$student['user']->id}}" href="javascript:void(0)"  title="{{($student['user']->Activated) ? 'Un Lock' :  'Locked'}}">

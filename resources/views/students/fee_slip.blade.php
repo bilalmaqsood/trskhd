@@ -35,11 +35,11 @@
         <div class="col-md-6">
             <div class="col-md-6">
                 <p>Father Name:</p>
-                <p>Date:</p>
+                <p>Due Date:</p>
             </div>
             <div class="col-md-6">
                 <p><strong>{{$student['user']->Guardian}}</strong></p>
-                <!-- <p><strong>{{\Carbon\Carbon::now()->toDateString()}}</strong></p> -->
+                <p><strong>{{config('app.fee_due_date')}} {{\Carbon\Carbon::now()->format('F')}}</strong></p>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -49,24 +49,25 @@
                 <thead>
                 <tr>
                     <th>SR No</th>
+                    <th>Month</th>
                     <th>Particular</th>
                     <th class="text-right">Amount</th>
                 </tr>
                 <tbody>
+                @foreach($fees as $fee)
                 <tr>
-                    <td>1</td>
+                    <td>{{$fee->id}}</td>
+                    <td>{{months($fee->month)}}</td>
                     <td>School Fee</td>
                     <td class="text-right">{{$student->studentClass->fee}}</td>
                 </tr>
-                {{--<tr>
-                    <td>3</td>
-                    <td>Late Fee</td>
-                    <td class="text-right">20</td>
-                </tr>--}}
+                @endforeach
+
                 <tr>
                     <td></td>
-                    <td><strong> Total </strong></td>
-                    <td class="text-right"><strong>{{$student->studentClass->fee}}</strong></td>
+                    <td></td>
+                    <td class="text-right"><strong> Total </strong></td>
+                    <td class="text-right"><strong>{{totalFee($fees,$student->studentClass->fee)}}</strong></td>
                 </tr>
                 </tbody>
                 </thead>

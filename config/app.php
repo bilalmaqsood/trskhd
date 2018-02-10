@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'fee_due_date' => '10th',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

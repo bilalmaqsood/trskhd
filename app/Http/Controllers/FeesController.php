@@ -37,6 +37,8 @@ class FeesController extends Controller
 
     public function showClassesStudents(Request $request)
     {
+        $this->validate($request,["class_id" => "required|numeric"]);
+
         $class_id = $request->query('class_id');
         $class    = $this->classService->find($class_id);
 
@@ -44,6 +46,11 @@ class FeesController extends Controller
     }
     public function addStudentsFee(Request $request)
     {
+
+        $this->validate($request,[
+           "month" => "required|numeric",
+            "year" => "required|numeric"
+        ]);
 
         $unpaidStudents = $request->students;
         $class_id       = $request->class_id;

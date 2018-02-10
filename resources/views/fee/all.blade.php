@@ -62,6 +62,7 @@
                             <td>{{ucfirst($fee->status)}}</td>
                             <td>
                                 {{--<a href="#" title="View"><i class="fa fa-eye"></i> </a>--}}
+                                <a href="{{route('studentFeeSlip' , ['id'=>$fee->student->id])}}" title="View"><i class="fa fa-file" aria-hidden="true"></i> </a>
                                 <a href="{{route('fee.edit' , [$fee->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
                                 <a href="{{route('delete_fee', [$fee->id])}}" title="Delete"><i class="fa fa-trash"></i> </a>
                             </td>
