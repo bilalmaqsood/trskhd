@@ -105,3 +105,14 @@ if (!function_exists('passwordResetSMS')) {
         return sendSms($number , $message);
     }
 }
+
+if (!function_exists('months')) {
+
+    function months($number)
+    {
+        $dateObj   = DateTime::createFromFormat('!m', $number);
+        $monthName = $dateObj->format('F'); // March
+        return $monthName;
+    }
+}
+

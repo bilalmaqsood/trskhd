@@ -57,8 +57,8 @@
                             <td>{{isset($fee->student) ? $fee->student->user->Last_Name : ""}}</td>
                             <td>{{isset($fee->student) ? $fee->student->user->Mobile : ""}}</td>
                             <td>{{isset($fee->student) ? ucfirst($fee->student->classes->first()->name) :""}}</td>
-                            <td>{{parse($fee->created_at)->format('M')}}</td>
-                            <td>{{parse($fee->created_at)->format('Y')}}</td>
+                            <td>{{ months($fee->month) }}</td>
+                            <td>{{$fee->year}}</td>
                             <td>{{ucfirst($fee->status)}}</td>
                             <td>
                                 {{--<a href="#" title="View"><i class="fa fa-eye"></i> </a>--}}

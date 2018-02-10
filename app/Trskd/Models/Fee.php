@@ -9,7 +9,10 @@ class Fee extends Model
     protected $table   = "fees";
     public $timestamps = true;
 
-    protected $fillable = ['class_id' ,'student_id' , 'status'];
+    const PAID = "paid";
+    const PENDING = "pending";
+
+    protected $fillable = ['class_id' ,'student_id' , 'status','year','month'];
 
     public function student()
     {

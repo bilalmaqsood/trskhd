@@ -33,7 +33,8 @@ class FeeService
 
     public function addFeeStatus($data)
     {
-        $fee = $this->model->create($data);
+        $fee = $this->model->firstOrNew($data);
+        $fee->save();
         $student = $this->studentService->find($data['student_id']);
         sendSms($student->user->Mobile);
     }
@@ -55,4 +56,20 @@ class FeeService
         return $this->model->find($id);
     }
 
+    public function addFeeDeposit($students,$request)
+    {
+        foreach ($students as $student)
+        {
+            $data = [
+                'class_id' => $request->class_id,
+                'student_id' => $student->id,
+                'status' => Fee::PAID,
+                'year' => $request->year,
+                'month' => $request->month
+            ];
+            $fee = $this->model->firstOrNew($data);
+            $fee->save();
+        }
+
+    }
 }

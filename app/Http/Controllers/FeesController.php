@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Trskd\Models\SchoolClass;
 use App\Trskd\Models\Student;
 use App\Trskd\Models\Fee;
 use App\Trskd\Services\ClassService;
@@ -47,20 +48,34 @@ class FeesController extends Controller
         $unpaidStudents = $request->students;
         $class_id       = $request->class_id;
 
+        $class = SchoolClass::find($request->class_id);
+
+        if (!count($request->students))
+        $students = $class->students;
+        else
+        $students = $class->students()->whereNotIn("students.id",array_keys($request->students))->get();
+
+        if($students->count())
+        $this->service->addFeeDeposit($students,$request);
+
+        if (count($unpaidStudents))
         foreach ($unpaidStudents as $student => $status)
         {
-            $data = ['class_id' => $class_id , 'student_id' => $student ,'status' => $status];
-            
-             Fee::create($data);
+            $data = [
+                'class_id' => $class_id,
+                'student_id' => $student,
+                'status' => $status,
+                'year' => $request->year,
+                'month' => $request->month
+                ];
             if($status == 'pending'){
-
                 $stdfeesms = Student::find($data['student_id']);
                 $this->sms->feeSMS($stdfeesms->user , 'Student');
-
             }
             $this->service->addFeeStatus($data);
         }
-        return redirect()->route('home');
+
+        return redirect('admin/fee');
     }
 
     public function create()
