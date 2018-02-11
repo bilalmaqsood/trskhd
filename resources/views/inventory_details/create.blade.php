@@ -46,16 +46,16 @@
                 {!! Form::select("details[$I->id][category_id]", $categories ,$I->category_id, ["class" =>"form-control"]) !!}
             </td>
             <td class="col-sm-3">
-                {!! Form::text("details[$I->id][unit_price]",$I->price, ['class' => 'form-control']) !!}
+                {!! Form::text("details[$I->id][unit_price]",$I->unit_price, ['class' => 'form-control']) !!}
             </td>
             <td class="col-sm-2">
-                {!! Form::text("details[$I->id][qty]",$I->price, ['class' => 'form-control']) !!}
+                {!! Form::text("details[$I->id][qty]",$I->qty, ['class' => 'form-control']) !!}
             </td>
             <td class="col-sm-3">
                 {!! Form::select("details[$I->id][type]", [1=>"debit",2=>"credit"] ,$I->type, ["class" =>"form-control"]) !!}
             </td>
             <td class="col-sm-2">
-                {!! Form::number("details[$I->id][total_amount]",$I->price, ['class' => 'form-control']) !!}
+                {!! Form::number("details[$I->id][total_amount]",$I->total_amount, ['class' => 'form-control']) !!}
             </td>
             <td class="col-sm-2"><a class="deleteRow btn btn-danger">Delete</a>
 

@@ -43,11 +43,31 @@ class InventoryDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $this->validate($request,[
+        $rows = $this->validate($request,[
             "inventory_id" => "required",
-            "category_id.*" => "required",
+            "details.*.category_id" => "required|numeric",
+            "details.*.unit_price" => "required|numeric",
+            "details.*.qty" => "required|numeric",
+            "details.*.type" => "required|numeric",
+            "details.*.total_amount" => "required|numeric",
         ]);
+//        dd($request->details);
+        foreach ($request->details as $index => $row){
+            $data = $row;
+            if(InventoryDetails::DEBIT){
+                $data["debit"] = $row["total_amount"];
+                $data["inventory_id"] = $request->inventory_id;
+                $data["balance"] = $request->balance + $row["total_amount"];
+                InventoryDetails::updateOrCreate(["id" => $index],$data);
+
+            } else if(InventoryDetails::CREDIT){
+                $data["credit"] = $row["total_amount"];
+                $data["inventory_id"] = $request->inventory_id;
+                $data["balance"] = $request->balance - $row["total_amount"];
+                InventoryDetails::updateOrCreate(["id" => $index],$data);
+            }
+        }
+    return redirect()->back();
     }
 
     /**

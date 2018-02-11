@@ -20,8 +20,8 @@ class CreateInventoryDetailsTable extends Migration
             $table->integer("type");
             $table->float("price");
             $table->integer("qty");
-            $table->float("debit");
-            $table->float("credit");
+            $table->float("debit")->nullable();
+            $table->float("credit")->nullable() ;
             $table->float("balance");
             $table->timestamps();
         });

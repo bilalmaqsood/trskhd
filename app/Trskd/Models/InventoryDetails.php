@@ -8,7 +8,10 @@ class InventoryDetails extends Model
 {
     protected $table = "inventory_details";
 
-    protected $fillable = ["price","category_id","qty","debit","credit","balance"];
+    const DEBIT = 1;
+    const CREDIT = 2;
+
+    protected $fillable = ["unit_price","inventory_id","category_id","type","qty","debit","credit","total_amount","balance"];
 
     public function inventory(){
         return $this->belongsTo(Inventory::class);
