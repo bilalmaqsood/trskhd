@@ -61,6 +61,7 @@
 
             Route::resource('student' , 'StudentsController');
             Route::resource('teacher' , 'TeachersController');
+            Route::resource('categories' , 'CategoriesController');
 
             Route::middleware(['can:admin'])->group(function (){
                 Route::resource('students/attendance' , 'AttendanceController');
