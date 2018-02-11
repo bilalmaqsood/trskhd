@@ -58,7 +58,7 @@ class Student extends Model
         $monthStart  = $salaryMonth->startOfMonth()->format('Y-m-d');
         $monthEnd    = $salaryMonth->endOfMonth()->format('Y-m-d');
 
-        $totalSms    = Smsable::whereBetween('created_at', array($monthStart, $monthEnd))->count();
+        $totalSms    = Smsable::where('user_id', $user)->whereBetween('created_at', array($monthStart, $monthEnd))->count();
 
         return ($totalSms * SMSCharges);
     }
@@ -66,5 +66,20 @@ class Student extends Model
     public function getNameAttribute()
     {
         return $this->user->First_Name ." ". $this->user->Last_Name;
+    }
+    public function getLeavesAttribute()
+    {
+        $feeMonth   = Carbon::now();
+        $monthStart = $feeMonth->startOfMonth()->format('Y-m-d');
+        $monthEnd   = $feeMonth->endOfMonth()->format('Y-m-d');
+
+        $attendance = Attendance::where('student_id', $this->id)->whereBetween('created_at', array($monthStart, $monthEnd))->where('status','absent')->count();
+
+        return $attendance ;
+    }
+    public function getLeavesFineAttribute()
+    {
+        $attendance = $this->leaves;
+        return ($attendance >= 1) ? ($attendance) * 20 : '0';
     }
 }

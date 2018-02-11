@@ -25,26 +25,13 @@ TRSKD.inventory = {
     var that = TRSKD.inventory;
 
     var index = $('.inventory-row:last').data("index")+1;
+        if(isNaN(index))
+            index = 0;
     var template = that.inventoryTemplate;
     var html = template({index: index});
     $(".inventory-container").append(html);
     return false;
   },
-
-    addUserinventory: function(event) {
-        event.preventDefault();
-        var that = TRSKD.inventory;
-
-        var index = $('.inventory-row:last').data("index")+1;
-        if(isNaN(index))
-            index = 0;
-        var template = that.inventoryTemplate;
-        var html = template({index: index});
-        console.log(html);
-        $(".inventorycontainder").append(html);
-        $('.cp2').colorpicker();
-        return false;
-    },
 
   deleteinventory: function(event) {
     event.preventDefault();

@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Trskd\Models\Calendar;
+use App\Trskd\Models\Inventory;
+use App\Trskd\Models\InventoryDetails;
 use App\Trskd\Models\Logo;
 use App\Trskd\Models\SchoolInfo;
+use App\Trskd\Models\Student;
+use App\Trskd\Models\Teacher;
+use App\Trskd\Models\User;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,7 +47,15 @@ class HomeController extends Controller
         }elseif($user->hasRole('teacher')) {
 
             return redirect()->route('teacher.show',[$user->teacher->id]);
+        }else if ($user->hasRole('super-admin')){
+
+            $students = Student::count();
+            $teachers = Teacher::count();
+            $boys     = User::where('Gender', 'male')->count();
+            $girls    = User::where('Gender', 'female')->count();
+            return view ('super-dashboard', compact('students', 'teachers', 'boys', 'girls'));
         }
+
 
     }
 
@@ -159,5 +173,23 @@ class HomeController extends Controller
     public function invnetory()
     {
         return view('admin.invnetory');
+    }
+
+    public function storeInvnetory(Request $request)
+    {
+        $inventory = $request->all();
+        $inventory = ['year'=>$inventory['year'], 'month'=>$inventory['month'], 'amount'=>$inventory['amount']];
+
+        $inv = Inventory::create($inventory);
+
+        foreach ($request->details as $detail){
+
+            $data = ['amount' => $detail[0], 'description' => $detail[1], 'type' => $detail[2]];
+
+            $inv->details()->create($data);
+        }
+
+        return redirect()->back();
+        dd($request->all());
     }
 }

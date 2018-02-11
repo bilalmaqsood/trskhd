@@ -35,14 +35,19 @@
                                         <td>{{ucfirst($student->user->Gender)}}</td>
                                         <td>{{$class->name}}</td>
                                         <td>
+                                            <input type="checkbox" class="status" >
+                                            <input class="student" type="hidden" name="students[{{$student->id}}]" value="present">
+
+                                        </td>
+                                        {{--<td>
                                             <input type="checkbox" style="display: none" checked name="students[{{$student->id}}]" value="present">
                                             <div class="checkbox clip-check check-primary">
-                                                        <input id="students[{{$student->id}}]" name="students[{{$student->id}}]" value="absent" type="checkbox">
-                                                        <label for="students[{{$student->id}}]">
-                                                           
-                                                        </label>
-                                                    </div>
-                                        </td>
+                                                <input id="students[{{$student->id}}]" name="students[{{$student->id}}]" value="absent" type="checkbox">
+                                                <label for="students[{{$student->id}}]">
+
+                                                </label>
+                                            </div>
+                                        </td>--}}
                                     </tr>
                                 @endforeach
                               </tbody>
@@ -62,7 +67,19 @@
 
 @section('js')
 
+    <script>
 
+        $(function(){
+
+            $('.status').on('click', function() {
+
+                if (this.checked == true){
+                    $(this).next('.student').val('absent');
+                }
+            });
+        });
+
+    </script>
 
 @endsection
 

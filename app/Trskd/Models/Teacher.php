@@ -58,14 +58,14 @@ class Teacher extends Model
         $monthStart  = $salaryMonth->startOfMonth()->format('Y-m-d');
         $monthEnd    = $salaryMonth->endOfMonth()->format('Y-m-d');
 
-        $totalSms    = Smsable::whereBetween('created_at', array($monthStart, $monthEnd))->count();
+        $totalSms    = Smsable::where('user_id', $user)->whereBetween('created_at', array($monthStart, $monthEnd))->count();
 
         return ($totalSms * SMSCharges);
     }
 
     public function getNetSalaryAttribute()
     {
-        return $this->Salary - $this->getLeavesFineAttribute() - $this->getSmsChargesAttribute();
+        return $this->Salary - $this->getLeavesFineAttribute();
     }
 
     public function getNameAttribute()
