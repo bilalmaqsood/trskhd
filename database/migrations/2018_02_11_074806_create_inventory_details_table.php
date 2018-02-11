@@ -16,6 +16,8 @@ class CreateInventoryDetailsTable extends Migration
         Schema::create('inventory_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("category_id");
+            $table->integer("inventory_id");
+            $table->integer("type");
             $table->float("price");
             $table->integer("qty");
             $table->float("debit");

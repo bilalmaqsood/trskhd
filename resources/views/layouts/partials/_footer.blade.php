@@ -10,6 +10,7 @@
 {{--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>--}}
 
+<script language="javascript" type="text/javascript" src="{{asset('/assets/js/handlebars/handlebars.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
 
@@ -24,4 +25,5 @@
 <script language="javascript" type="text/javascript" src="{{asset('/assets/js/toastr/toastr.min.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{asset('/assets/scripts/custom.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{asset('/assets/scripts/select2.full.min.js')}}"></script>
+
 <!-- Scripts End -->

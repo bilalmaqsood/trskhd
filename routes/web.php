@@ -62,6 +62,10 @@
             Route::resource('student' , 'StudentsController');
             Route::resource('teacher' , 'TeachersController');
             Route::resource('categories' , 'CategoriesController');
+            Route::resource('inventories' , 'InventoryController');
+            Route::resource('inventory_details' , 'InventoryDetailsController');
+            Route::get('inventory_details/{id}/add' , 'InventoryDetailsController@addInventory')->name('inventory_details.add');
+
 
             Route::middleware(['can:admin'])->group(function (){
                 Route::resource('students/attendance' , 'AttendanceController');

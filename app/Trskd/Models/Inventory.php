@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inventory extends Model
 {
-    protected $table = "inventory";
+    protected $table = "inventories";
 
-    public $timestamps = true;
-    protected $fillable = ['year', 'month', 'amount', 'title', 'description', 'type'];
+    protected $fillable = ["title","month","year"];
+
+    public function inventories(){
+        return $this->hasMany(InventoryDetails::class);
+    }
 }
