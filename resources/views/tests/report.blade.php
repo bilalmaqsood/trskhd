@@ -2,6 +2,7 @@
 
 @section('css')
 @endsection
+@section('title', 'Report')
 
 @section('content')
 

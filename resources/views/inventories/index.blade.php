@@ -42,8 +42,9 @@
             <td>{{ months($inventory->month) }}</td>
             <td>{{$inventory->year}}</td>
             <td>
-                <a href="{{route('categories.show' , [$inventory->id])}}" title="View"><i class="fa fa-eye"></i> </a>
-                <a href="{{route('categories.edit' , [$inventory->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
+                <a href="{{route('inventories.show' , [$inventory->id])}}" title="View"><i class="fa fa-eye"></i> </a>
+                <a href="{{route('inventories.edit' , [$inventory->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>
+                <a href="{{route('inventory_details.add' , [$inventory->id])}}" title="Edit"><i class="fa fa-edit"></i></i> </a>
                 <a class="delete" data-id="{{$inventory->id}}" href="javascript:void(0)" title="Delete">
                     <i class="fa fa-trash"></i>
                 </a>

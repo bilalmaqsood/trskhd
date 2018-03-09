@@ -7,7 +7,7 @@
                     <a href="{{route('home')}}"><img src="{{asset('')}}/assets/images/{{isset($header->name)? $header->name : 'logo.png' }}" class="logo" alt=""></a>
                 </div>
                   @if(isset(Auth::user()->id))
-                @if(Auth::user()->hasRole('admin'))
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('super-admin'))
                     <!-- Start Admin Side Menu -->
                         @include('layouts.partials._side_menu')
                     <!-- End admin Side Menu -->
@@ -20,6 +20,7 @@
                         @include('layouts.partials._staff_side_menu')
                     <!-- End admin Side Menu -->
                 @endif
+                
             @endif
                 <!-- <ul class="list-unstyled CTAs">
                     <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>

@@ -43,6 +43,8 @@ class InventoryDetailsController extends Controller
      */
     public function store(Request $request)
     {
+        if(empty($request->details))
+            return redirect()->back();
         $rows = $this->validate($request,[
             "inventory_id" => "required",
             "details.*.category_id" => "required|numeric",
@@ -51,21 +53,20 @@ class InventoryDetailsController extends Controller
             "details.*.type" => "required|numeric",
             "details.*.total_amount" => "required|numeric",
         ]);
-//        dd($request->details);
+
+        if (is_array($request->details)){
+            $oldData = Inventory::findorfail($request->inventory_id)->inventories->pluck("id")->toArray();
+            if($oldData){
+                $formData = array_keys($request->details);
+                InventoryDetails::destroy(array_diff($oldData,$formData));
+            }
+
+        }
+
         foreach ($request->details as $index => $row){
             $data = $row;
-            if(InventoryDetails::DEBIT){
-                $data["debit"] = $row["total_amount"];
-                $data["inventory_id"] = $request->inventory_id;
-                $data["balance"] = $request->balance + $row["total_amount"];
-                InventoryDetails::updateOrCreate(["id" => $index],$data);
-
-            } else if(InventoryDetails::CREDIT){
-                $data["credit"] = $row["total_amount"];
-                $data["inventory_id"] = $request->inventory_id;
-                $data["balance"] = $request->balance - $row["total_amount"];
-                InventoryDetails::updateOrCreate(["id" => $index],$data);
-            }
+            $data["inventory_id"] = $request->inventory_id;
+            InventoryDetails::updateOrCreate(["id" => $index],$data);
         }
     return redirect()->back();
     }
@@ -120,6 +121,9 @@ class InventoryDetailsController extends Controller
     {
         $inventory = Inventory::findorfail($id);
         $invetories = $inventory->inventories;
-        return view("inventory_details.create",compact("inventory","invetories"));
+        $balance = count($inventory->inventories)?$inventory->inventories->last()->balance:0.00;
+        $debit = $invetories->where('type',InventoryDetails::DEBIT)->sum("total_amount");
+        $credit = $invetories->where('type',InventoryDetails::CREDIT)->sum("total_amount");
+        return view("inventory_details.create",compact("inventory","invetories","credit","debit","balance"));
     }
 }

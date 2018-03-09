@@ -1,7 +1,7 @@
 <div class="clear50"></div>
 <div class="container">
     <footer class="footer">
-        <img src="{{asset('')}}/assets/images/{{isset($footer->name) ? $footer->name : 'footer_logo.png' }}" align="footer_logo">
+        <!-- <img src="{{asset('')}}/assets/images/{{isset($footer->name) ? $footer->name : 'footer_logo.png' }}" align="footer_logo"> -->
         <p class="text-center copy_right">© 2017, . All Rights Reserved The Right School.</p>
     </footer>
 </div>

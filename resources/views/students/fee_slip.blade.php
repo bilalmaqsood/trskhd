@@ -5,12 +5,8 @@
 @section('title' , 'Fee Slip')
 @section('content')
 
-    <div class="clear40"></div>
-    <div class="container fee_slip_area">
-         <div class="jumbotron">
-            <h2 class="">Fee Slip</h2>
-        </div>
-    <div class="clear40"></div> -->
+    <div class="">
+    <div class="clear30"></div> 
     <div class="print_page" id="printTable">
         <div class="text-center">
             <img src="{{asset('')}}/assets/images/{{isset($header->name)? $header->name : 'logo.png' }}" class="logo" alt="">

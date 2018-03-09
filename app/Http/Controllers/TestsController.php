@@ -7,6 +7,7 @@ use App\Trskd\Services\TestsService;
 use Illuminate\Http\Request;
 use App\Trskd\Services\ExamsService;
 use App\Trskd\Services\StudentService;
+use App\Trskd\Models\Student;
 use App\Trskd\Services\UserService;
 use App\Trskd\Services\SMSService;
 use Illuminate\Support\Facades\Auth;
@@ -111,8 +112,10 @@ class TestsController extends Controller
                    'status' => $detail['status'],
                    'student_id' => $detail['student_id'],
                ]);
-               
             }
+        $user = Student::find($detail['student_id'])->user;
+        sendSms($user->Mobile , $message = "Dear Student " .$user->First_Name." ".$user->Last_Name. " \n Test Title " .$test->Name. " \n Passing Marks " .$test->Passing_Marks. " \n Total Marks " .$test->Total_Marks. "\n  Obtainted Marks " .$detail['marks']. "\n Status: " .$detail['status']);
+
         }
 
 
@@ -121,6 +124,7 @@ class TestsController extends Controller
 
     public function updateTestMarks(Request $request, $id)
     {
+        // dd($request->details);
         $test = $this->service->find($id);
 
         if($test){
@@ -140,6 +144,8 @@ class TestsController extends Controller
                        'student_id' => $detail['student_id'],
                     ]
                );
+               $user = Student::find($detail['student_id'])->user;
+               sendSms($user->Mobile , $message = "Dear Student " .$user->First_Name." ".$user->Last_Name. " \n Test Title " .$test->Name. " \n Passing Marks " .$test->Passing_Marks. " \n Total Marks " .$test->Total_Marks. "\n  Obtainted Marks " .$detail['marks']. "\n Status: " .$detail['status']);
             }
         }
 

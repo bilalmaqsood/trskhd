@@ -1,27 +1,30 @@
 @extends('layouts.app')
 
 @section('css')
+<style type="text/css">
+
+
+</style>
 @endsection
 @section('title','Salary Slip')
 @section('content')
 
-    <div class="clear40"></div>
     <div class="heading_btns_area">
-        <div class="container">
             <h2 class="pull-left">Salary Slip</h2>
             <div class="pull-right">
                 <a href="{{route('download_salary_slip' , [$teacher->id])}}" class="download btn margin-bottom-5 btn-wide btn-o btn-primary">
-                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <i class="fa fa-download fa-lg" aria-hidden="true"></i>
                 </a>
             </div>
+            <div class="clearfix">
         </div>
     </div>
     <div class="clear40"></div>
-    <div class="container salary_slip_area">
+    <div class="salary_slip_area">
         <div class="text-center">
-            <img src="{{asset('')}}/assets/images/logo.png" class="logo" alt="">
-            <h1 class="text-uppercase">Salary Slip</h1>
+            <img src="{{asset('')}}/assets/images/{{isset($header->name)? $header->name : 'logo.png' }}" class="logo" alt="">
         </div>
+        <div class="clear20"></div>
         <div class="salary_slip_details">
             <div class="col-md-3">
                 <p>Name</p>
@@ -69,11 +72,12 @@
             <div class="clearfix"></div>
             <div class="sign_area">
                 <div class="col-md-6">
-                    <p><strong>Signature of Employee</strong>  _____________________________________</p>
+                    <p><strong>Signature of Employee</strong>  _________________________________</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Signature of Dirctor</strong>  _____________________________________</p>
+                    <p><strong>Signature of Dirctor</strong>  __________________________________</p>
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>

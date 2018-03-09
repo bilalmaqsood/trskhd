@@ -56,6 +56,13 @@
                     <li><a href="{{route('SendAllStaffSms')}}">All Staff SMS</a></li>
                  </ul>
             </li>
+            <li>
+                 <a href="#inventory" data-toggle="collapse" aria-expanded="false">Inventory</a>
+                 <ul class="collapse list-unstyled" id="inventory">
+                    <li><a href="{{route('categories.index')}}">Categroies</a></li>
+                    <li><a href="{{route('inventories.index')}}">Inventory</a></li>
+                 </ul>
+            </li>
              <li>
                  <a href="#report" data-toggle="collapse" aria-expanded="false">Reports</a>
                  <ul class="collapse list-unstyled" id="report">

@@ -60,9 +60,9 @@
                                 <td>{{$teacher['user']->Last_Name}}</td>
                                 <td>{{$teacher['user']->Mobile}}</td>
                                 <td>{{$teacher->Designation}}</td>
+                                <td>{{$teacher['user']->CNIC}}</td>
                                 <td>{{parse($teacher->Joining_Date)->format('M')}}</td>
                                 <td>{{parse($teacher->Joining_Date)->format('Y')}}</td>
-                                <td>{{$teacher['user']->CNIC}}</td>
                                 <td>
                                     <a href="{{route('teacher.show' , [$teacher->id])}}" title="View"><i class="fa fa-eye"></i> </a>
                                     <a href="{{route('teacher.edit' , [$teacher->id])}}" title="Edit"><i class="fa fa-pencil"></i> </a>

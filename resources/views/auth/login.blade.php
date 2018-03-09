@@ -15,8 +15,8 @@ nav.navbar.navbar-default {
 }
 </style>
 @endsection
+@section('title' , 'Login')
 @section('content')
-    
         
 <div class="container">
     <div class="login_login text-center">

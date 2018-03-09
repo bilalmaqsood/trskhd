@@ -2,7 +2,7 @@
 
 @section('css')
 @endsection
-@section('title' , 'SMS')
+@section('title' , 'Single SMS')
 @section('content')
 
     <div class="clear40"></div>
