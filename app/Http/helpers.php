@@ -3,6 +3,8 @@
 use App\Trskd\Models\SchoolClass;
 use App\Trskd\Models\Student;
 use App\Trskd\Models\User;
+use TADPHP\TADFactory;
+use TADPHP\TAD;
 
 if (!function_exists('parse')) {
 
@@ -122,5 +124,19 @@ if (!function_exists('totalFee')) {
     {
         $count = $fees->count();
         return $count*$amount;
+    }
+}
+
+if (!function_exists('deviceStatus')) {
+
+    function deviceStatus($ip='192.168.1.201')
+    {
+      $tadf = new TADFactory(['ip' => $ip]);
+        $tad = $tadf->get_instance();
+
+        $status = $tad->is_alive();
+        logger($status);
+        return $status;
+    
     }
 }

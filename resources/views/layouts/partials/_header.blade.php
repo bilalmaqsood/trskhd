@@ -41,6 +41,13 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right margin-top-10">
+                                <li>
+                                    @if(deviceStatus())
+                                    <span style="background-color: #3fb618;border-color: #4e9f15;color: #ffffff;" id="device_status" class="alert-default alert-success alert-danger'}}"><strong>&nbsp;Online&nbsp;</strong></span>
+                                    @else
+                                    <span style="background-color: #ff0039;border-color: #f0005e;color: #ffffff;" id="device_status" class="alert-default alert-danger'}}"><strong>&nbsp;Offline&nbsp;</strong></span>
+                                    @endif
+                                </li>
                                 <li><a href="{{route('home')}}" class="btn btn-primary btn-wide">Home</a></li>
                                 <li><a href="{{route('logo')}}" class="btn btn-success btn-wide">Change Logo</a></li>
                             </ul>
