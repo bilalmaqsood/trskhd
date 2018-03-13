@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\SendBirthDaySMS::class,
+        Commands\ProcessAttendence::class,
     ];
 
     /**
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('email:birthday')->dailyAt('09:00');
+        $schedule->command('process:attendence')->timezone('Asia/Karachi')->dailyAt('09:00');
     }
 
     /**
