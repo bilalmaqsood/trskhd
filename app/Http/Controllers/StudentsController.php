@@ -93,11 +93,20 @@ class StudentsController extends Controller
     {
         $this->authorize('delete');
 
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $user = $this->userService->find($id);
-
+        $student_id=$user->student->id;
         $user->student()->delete();
         $user->roles()->detach();
         $status = $user->delete();
+
+        \DB::table('attendance')->where('student_id', '=', $student_id)->delete();
+        \DB::table('class_student')->where('student_id', '=', $student_id)->delete();
+        \DB::table('fees')->where('student_id', '=', $student_id)->delete();
+        \DB::table('results')->where('student_id', '=', $student_id)->delete();
+        \DB::table('test_details')->where('student_id', '=', $student_id)->delete();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         return response()->json(['success' => 'success'], 200);
         return $status;
     }

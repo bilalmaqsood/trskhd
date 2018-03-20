@@ -72,11 +72,17 @@ class TeachersController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete');
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $user = $this->userService->find($id);
-
+        $teacher_id=$user->teacher->id;
         $user->teacher()->delete();
         $user->roles()->detach();
         $status = $user->delete();
+
+        \DB::table('teacher_attendance')->where('teacher_id', '=', $teacher_id)->delete();
+        \DB::table('class_teacher')->where('teacher_id', '=', $teacher_id)->delete();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         return response()->json(['success' => 'success'], 200);
 
     }
