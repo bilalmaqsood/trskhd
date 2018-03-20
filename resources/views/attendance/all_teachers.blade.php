@@ -53,6 +53,7 @@
                 </tfoot>
                 <tbody>
                 @foreach($attendances as $attendance)
+                    @if($attendance->teacher)
                 <tr>
                     <td>{{ isset($attendance->teacher) ? $attendance->teacher->user->First_Name.' '.$attendance->teacher->user->Last_Name : ""}}</td>
                     <td>{{isset($attendance->teacher) ? $attendance->teacher->user->Mobile : ""}}</td>
@@ -66,7 +67,8 @@
                         </td>
                         @endif
                         </tr>
-                        @endforeach
+                    @endif
+                @endforeach
                 </tbody>
             </table>
 
