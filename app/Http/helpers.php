@@ -129,7 +129,7 @@ if (!function_exists('totalFee')) {
 
 if (!function_exists('deviceStatus')) {
 
-    function deviceStatus($ip='192.168.1.201')
+    function deviceStatus($ip='182.180.104.108')
     {
       $tadf = new TADFactory(['ip' => $ip]);
         $tad = $tadf->get_instance();

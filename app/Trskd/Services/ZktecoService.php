@@ -26,7 +26,7 @@ class ZktecoService
     public function __construct()
     {
 
-            $tadf = new TADFactory(['ip' => '192.168.1.201']);
+            $tadf = new TADFactory(['ip' => '182.180.104.108']);
             $this->tad = $tadf->get_instance();
     }
 

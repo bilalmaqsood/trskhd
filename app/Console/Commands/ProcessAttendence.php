@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Trskd\Services\AttendanceService;
 use App\Trskd\Services\SMSService;
 use App\Trskd\Services\ZktecoService;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use App\Trskd\Models\User;
 use App\Trskd\Models\Student;
@@ -52,7 +53,7 @@ class ProcessAttendence extends Command
     public function handle()
     {
         $data = $this->Zkteco->Datasort();
-
+        logger(Carbon::now());
         if($data){
             $IDs = $data->pluck("PIN")->toArray();
             $this->processStuentAttendance($IDs);
