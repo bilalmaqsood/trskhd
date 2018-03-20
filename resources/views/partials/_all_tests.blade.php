@@ -28,7 +28,11 @@
     <tbody>
     @foreach($tests as $test)
         <tr>
+            @if($test['teacher']->user)
             <td>{{$test['teacher']->user->First_Name ." ". $test['teacher']->user->Last_Name}}</td>
+            @else
+                <td>N/A</td>
+            @endif
             <td>{{$test->examclass->name}}</td>
             <td>{{$test->Name}}</td>
             <td>{{parse($test->Start_Date)->format('M')}}</td>
