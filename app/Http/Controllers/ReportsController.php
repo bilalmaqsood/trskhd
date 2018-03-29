@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Trskd\Models\Book;
+use App\Trskd\Models\Fee;
 use App\Trskd\Models\Exam;
 use App\Trskd\Models\ExamDetails;
 use App\Trskd\Models\Result;
@@ -108,9 +109,28 @@ class ReportsController extends Controller
         $class = SchoolClass::find($request['class_id']);
         $html = "";
         $pdf = App::make('dompdf.wrapper');
-        foreach ($class->students as $index => $student) {
-            $html = $html."<br>".(string) view('reports.pdf.fee_slip', ["student"=>$student]);
+
+//        dd($request->all());
+        if($request->has('class_id') && ($request->has('month')||$request->has("year"))){
+            $query = Fee::where('class_id', $request->get('class_id'));
+            if($request->has('month'))
+            $query = $query->where('month' ,'=', $request->get('month'));
+            if($request->has('year'))
+                $query = $query->where('year' ,'=', $request->get('year'));
+            foreach ($query->get() as $index => $fee) {
+                $student = $fee->student;
+                $html = $html."<br>".(string) view('reports.pdf.fee_slip', [
+                    "student"=>$student,
+                     "date" => "10-".str_pad($fee->month, 2, "0", STR_PAD_LEFT)."-".$fee->year
+                    ]);
+            }
+        } else{
+            foreach ($class->students as $index => $student) {
+                $html = $html."<br>".(string) view('reports.pdf.fee_slip', ["student"=>$student]);
+            }
         }
+
+
         $pdf->loadHTML($html);
         return $pdf->stream();
     }

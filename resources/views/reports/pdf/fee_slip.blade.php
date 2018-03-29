@@ -260,7 +260,7 @@
             </div>
             <div class="col-md-4 no-padding text-right">
                 <p>{{$student['user']->Guardian}}</p>
-                <p>{{\Carbon\Carbon::now()->toDateString()}}</p>
+                <p>{{isset($date)?$date:\Carbon\Carbon::now()->format("d-m-Y")}}</p>
             </div>
         </div>
         <div class="clear10"></div>
