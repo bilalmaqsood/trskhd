@@ -33,10 +33,10 @@ class Book extends Model
 
     public function number($exam, $classId, $studentId)
     {
-        if($exam->isEmpty() || empty($classId))
+        if(empty($classId) || empty($exam))
             return null;
 
-        $examId = $exam->first()->id;
+        $examId = $exam->id;
 
         $result = Result::where('book_id', $this->id)
             ->where('class_id', $classId)->where('exam_id', $examId)->where('student_id', $studentId)->first();
@@ -47,10 +47,10 @@ class Book extends Model
 
     public function totalNumber($exam, $classId, $studentId)
     {
-        if($exam->isEmpty() || empty($classId))
+        if(empty($classId) || empty($exam))
             return null;
 
-        $exam = $exam->first();
+//        $exam = $exam->first();
         if($exam){
 
             $exam->load('details');
@@ -62,10 +62,10 @@ class Book extends Model
 
     public function passingNumber($exam, $classId, $studentId)
     {
-        if($exam->isEmpty() || empty($classId))
+        if(empty($classId) || empty($exam))
             return null;
         
-        $exam = $exam->first();
+//        $exam = $exam->first();
         if($exam){
 
             $exam->load('details');

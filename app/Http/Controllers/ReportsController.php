@@ -106,6 +106,8 @@ class ReportsController extends Controller
 
 
     public function generateFeeSlip($request){
+        $this->validate($request,["class_id"=>"required"]);
+
         $class = SchoolClass::find($request['class_id']);
         $html = "";
         $pdf = App::make('dompdf.wrapper');
@@ -165,11 +167,31 @@ class ReportsController extends Controller
         return $pdf->stream();
     }
      public function generateStudentResultCard($request){
-        $class = SchoolClass::find($request['class_id']);
+//        $class = SchoolClass::find($request['class_id']);
+         $this->validate($request,["class_id"=>"required"]);
+
+         $query = Exam::where("class_id",$request["class_id"]);
+         if($request->has("year")&&!empty($request["year"]))
+             $query->where("Year",$request["year"]);
+         if($request->has("type")&&!empty($request["type"]))
+             $query->where("Type",$request["type"]);
+
+         if(!$query->count()){
+             \Session::flash('error', 'No record found');
+             return back();
+         }
+
+         $exam = $query->first();
+         $class = $exam->examclass;
+
         $html = "";
         $pdf = App::make('dompdf.wrapper');
         foreach ($class->students as $index => $student) {
-            $html = $html."<br>".(string) view('reports.pdf.std_result_card', ["student"=>$student]);
+            $html = $html."<br>".(string) view('reports.pdf.std_result_card', [
+                "student"=>$student,
+                "exam"=>$exam,
+                "class_id" => $class->id
+                ]);
         }
         $pdf->loadHTML($html);
         return $pdf->stream();
