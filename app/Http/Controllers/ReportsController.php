@@ -136,13 +136,29 @@ class ReportsController extends Controller
     }
 
     public function generateRollNoSlip(Request $request){
-        $class = SchoolClass::find($request['class_id']);
+
+        $this->validate($request,["class_id"=>"required"]);
+
+        $query = Exam::where("class_id",$request["class_id"]);
+        if($request->has("year")&&!empty($request["year"]))
+            $query->where("Year",$request["year"]);
+        if($request->has("type")&&!empty($request["type"]))
+            $query->where("Type",$request["type"]);
+
+        if(!$query->count()){
+            \Session::flash('error', 'No record found');
+            return back();
+        }
+
+        $exam = $query->first();
+        $class = $exam->examclass;
+
         $html = "";
         $pdf = App::make('dompdf.wrapper');
         foreach ($class->students as $index => $student) {
             $html = $html."<br>".(string) view('reports.pdf.roll_no_slip', [
                 "student"=>$student,
-                "exams" => $class->exams
+                "exam" => $exam
                 ]);
         }
         $pdf->loadHTML($html);

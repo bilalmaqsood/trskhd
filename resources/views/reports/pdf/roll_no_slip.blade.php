@@ -268,8 +268,7 @@
         </tr>
         </thead>
         <tbody>
-            @if(count($exams) > 0)
-                @foreach($exams->first()->details as $detail)
+                @foreach($exam->details as $detail)
                     <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$detail->book->name}}</td>
@@ -279,7 +278,6 @@
                     <td> {{$detail->Room}}</td>
                     </tr>
                 @endforeach
-            @endif
         </tbody>
     </table>
     <div class="pull-left">
