@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('email:birthday')->dailyAt('09:00');
-        $schedule->command('process:attendence')->timezone('Asia/Karachi')->dailyAt('09:00');
+        $schedule->command('sms:birthday')->dailyAt('09:05');
+        $schedule->command('process:attendence')->dailyAt('11:05');
     }
 
     /**
