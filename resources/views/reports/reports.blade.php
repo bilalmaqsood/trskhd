@@ -27,11 +27,28 @@
                     </select>
               </div>
               <div class="col-sm-3">
+                    <select id='months' name="month" class="form-control">
+                    <option value='' selected disabled="">--Select Month--</option>
+                    <option value='1'>Janaury</option>
+                    <option value='2'>February</option>
+                    <option value='3'>March</option>
+                    <option value='4'>April</option>
+                    <option value='5'>May</option>
+                    <option value='6'>June</option>
+                    <option value='7'>July</option>
+                    <option value='8'>August</option>
+                    <option value='9'>September</option>
+                    <option value='10'>October</option>
+                    <option value='11'>November</option>
+                    <option value='12'>December</option>
+                    </select>
+              </div>
+                <div class="col-sm-3">
                     <select id='type' name="type" class="form-control">
                     <option value='' selected disabled="">--Select Term--</option>
                     <option value='Mid Term'>Mid Term</option>
                     <option value='Final Term'>Final Term</option>
-                    </select> 
+                    </select>
               </div>
               <div class="col-sm-3">
                    <select id="" name="class_id" class="form-control">
