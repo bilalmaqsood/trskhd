@@ -29,6 +29,7 @@
 <link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/responsive.css')}}">
 <link type="text/css" rel="stylesheet" href="{{asset('/assets/styles/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
 
 <!-- Styles End -->
 
